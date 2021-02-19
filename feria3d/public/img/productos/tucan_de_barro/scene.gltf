@@ -1,0 +1,419 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.85787999629974365,
+        0.59974002838134766,
+        1.8252500295639038
+      ],
+      "min": [
+        -0.8306499719619751,
+        -0.93352001905441284,
+        -0.92636001110076904
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 786384,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.99996310472488403,
+        0.99999243021011353,
+        0.99989694356918335
+      ],
+      "min": [
+        -0.99999898672103882,
+        -0.99999719858169556,
+        -0.99931144714355469
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.99992996454238892,
+        0.99993395805358887,
+        0.99999958276748657,
+        1
+      ],
+      "min": [
+        -0.99999147653579712,
+        -0.99962437152862549,
+        -0.99976629018783569,
+        -1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.99392998218536377,
+        0.99711000919342041
+      ],
+      "min": [
+        0,
+        0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 347844,
+      "max": [
+        65531
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1572768,
+      "componentType": 5126,
+      "count": 9348,
+      "max": [
+        0.69229000806808472,
+        0.59567999839782715,
+        1.9973000288009644
+      ],
+      "min": [
+        -0.5760200023651123,
+        -0.94129997491836548,
+        -0.92636001110076904
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1684944,
+      "componentType": 5126,
+      "count": 9348,
+      "max": [
+        0.99904823303222656,
+        0.99945193529129028,
+        0.98614406585693359
+      ],
+      "min": [
+        -0.99796009063720703,
+        -0.99999099969863892,
+        -0.99944859743118286
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 1048512,
+      "componentType": 5126,
+      "count": 9348,
+      "max": [
+        0.99968916177749634,
+        0.99222952127456665,
+        0.99968451261520386,
+        1
+      ],
+      "min": [
+        -0.99622803926467896,
+        -0.99433690309524536,
+        -0.99913883209228516,
+        -1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 524256,
+      "componentType": 5126,
+      "count": 9348,
+      "max": [
+        0.9955899715423584,
+        0.97913002967834473
+      ],
+      "min": [
+        0,
+        0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 1391376,
+      "componentType": 5125,
+      "count": 34869,
+      "max": [
+        9347
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "MSRV (https://sketchfab.com/marckbyn_93)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/tucan-de-barro-3780bf2bc36d40e8a372d346ee5365c7",
+      "title": "Tucán de barro"
+    },
+    "generator": "Sketchfab-5.80.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 1530852,
+      "byteOffset": 0,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 599040,
+      "byteOffset": 1530852,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1797120,
+      "byteOffset": 2129892,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1198080,
+      "byteOffset": 3927012,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 5125092,
+      "uri": "scene.bin"
+    }
+  ],
+  "extensionsRequired": [
+    "KHR_materials_pbrSpecularGlossiness"
+  ],
+  "extensionsUsed": [
+    "KHR_materials_pbrSpecularGlossiness"
+  ],
+  "images": [
+    {
+      "uri": "textures/tucan_diffuse.png"
+    },
+    {
+      "uri": "textures/tucan_specularGlossiness.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0.74885670731707321,
+        0.74885670731707321,
+        0.74885670731707321
+      ],
+      "emissiveTexture": {
+        "index": 0,
+        "texCoord": 0
+      },
+      "extensions": {
+        "KHR_materials_pbrSpecularGlossiness": {
+          "diffuseFactor": [
+            0.82488567073170727,
+            0.82488567073170727,
+            0.82488567073170727,
+            1
+          ],
+          "diffuseTexture": {
+            "index": 0,
+            "texCoord": 0
+          },
+          "glossinessFactor": 0.74561737804878048,
+          "specularFactor": [
+            0.18464176829268292,
+            0.18464176829268292,
+            0.18464176829268292
+          ],
+          "specularGlossinessTexture": {
+            "index": 1,
+            "texCoord": 0
+          }
+        }
+      },
+      "name": "tucan"
+    }
+  ],
+  "meshes": [
+    {
+      "name": "tucan_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "tucan_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 6,
+            "POSITION": 5,
+            "TANGENT": 7,
+            "TEXCOORD_0": 8
+          },
+          "indices": 9,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "name": "RootNode (gltf orientation matrix)",
+      "rotation": [
+        -0.70710678118654746,
+        -0,
+        -0,
+        0.70710678118654757
+      ]
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "RootNode (model correction matrix)"
+    },
+    {
+      "children": [
+        3,
+        5
+      ],
+      "name": "Root"
+    },
+    {
+      "children": [
+        4
+      ],
+      "matrix": [
+        -0.29086000000000006,
+        0.95517000000000007,
+        -0.05519000000000001,
+        0,
+        -0.77110000000000001,
+        -0.19988000000000003,
+        0.60452000000000006,
+        0,
+        0.56639000000000006,
+        0.21839000000000003,
+        0.7946700000000001,
+        0,
+        4.0762500000000008,
+        1.00545,
+        5.9038600000000008,
+        1
+      ],
+      "name": "Lamp"
+    },
+    {
+      "name": "Lamp"
+    },
+    {
+      "children": [
+        6,
+        7
+      ],
+      "matrix": [
+        0.90861000000000003,
+        0.021330000000000005,
+        -0.41710000000000003,
+        0,
+        -0.054010000000000016,
+        0.99630999999999992,
+        -0.066720000000000029,
+        0,
+        0.41413,
+        0.083150000000000016,
+        0.90640999999999994,
+        0,
+        0,
+        -0,
+        0.019160000000000003,
+        1
+      ],
+      "name": "tucan"
+    },
+    {
+      "mesh": 0,
+      "name": "tucan_0"
+    },
+    {
+      "mesh": 1,
+      "name": "tucan_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    },
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 33071,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "OSG_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 1,
+      "source": 1
+    }
+  ]
+}
+

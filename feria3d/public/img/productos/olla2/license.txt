@@ -1,0 +1,11 @@
+Model Information:
+* title:	CE 0821 - OLLA
+* source:	https://sketchfab.com/3d-models/ce-0821-olla-3059be21df5b4b40a9227c3f94511c56
+* author:	Ministerio de Cultura Peru (https://sketchfab.com/MinisteriodeCulturaPeru)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "CE 0821 - OLLA" (https://sketchfab.com/3d-models/ce-0821-olla-3059be21df5b4b40a9227c3f94511c56) by Ministerio de Cultura Peru (https://sketchfab.com/MinisteriodeCulturaPeru) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Cerámica policromada
+* source:	https://sketchfab.com/3d-models/ceramica-policromada-ac885efc7c77414e848d70240cf30afd
+* author:	tecnoarcadia (https://sketchfab.com/tecnoarcadia)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Cerámica policromada" (https://sketchfab.com/3d-models/ceramica-policromada-ac885efc7c77414e848d70240cf30afd) by tecnoarcadia (https://sketchfab.com/tecnoarcadia) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

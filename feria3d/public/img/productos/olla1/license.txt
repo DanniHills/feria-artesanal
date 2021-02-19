@@ -1,0 +1,11 @@
+Model Information:
+* title:	CE 2406 - OLLA
+* source:	https://sketchfab.com/3d-models/ce-2406-olla-7c6acac64a0a43199152a333c4b5b2af
+* author:	Ministerio de Cultura Peru (https://sketchfab.com/MinisteriodeCulturaPeru)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "CE 2406 - OLLA" (https://sketchfab.com/3d-models/ce-2406-olla-7c6acac64a0a43199152a333c4b5b2af) by Ministerio de Cultura Peru (https://sketchfab.com/MinisteriodeCulturaPeru) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
