@@ -3,15 +3,15 @@ import {  Row, Col, Descriptions, Button } from "antd";
 import CatalogoService from "../../services/CatalogoService";
 import { Link, useParams } from "react-router-dom";
 import '@google/model-viewer';
-import ArtesanoService from "../../services/artesanoService";
+//import ArtesanoService from "../../services/artesanoService";
 
         
 function DetalleProd() {
   const prod_id = useParams().prod_id;
   const uploadsUrl = 'http://localhost/';
   const [producto, setProducto] = useState(null);
-  const artesanoService = new ArtesanoService();
-  const [artesano, setArtesano] = useState(null);
+  //const artesanoService = new ArtesanoService();
+  //const [artesano, setArtesano] = useState(null);
   useEffect(() => {
     CatalogoService.detalleProducto(prod_id)
       .then((res) => {
@@ -65,7 +65,7 @@ function DetalleProd() {
                     <Descriptions.Item label={'Descripción: ' + producto.prod_descrip} span={6}> </Descriptions.Item>
                     <Descriptions.Item label = {'puesto: '+ producto.pArt_id} span={6}></Descriptions.Item>
                     <Descriptions.Item label={'Información de Contacto'} span={6}> </Descriptions.Item>
-                    <Descriptions.Item label={'Artesano:' + artesano.pArt_id} span={6}> </Descriptions.Item>
+                    <Descriptions.Item label={'Artesano:'  } span={6}> </Descriptions.Item>
                     <Descriptions.Item label={'Telefono: 945677654' } span={6}> </Descriptions.Item>
                     <Descriptions.Item label={'Correo: toro@gmail.com' } span={6}> </Descriptions.Item>
                 </Descriptions>
@@ -78,10 +78,6 @@ function DetalleProd() {
         </Col>
         )}
       </Row>
-
-
-
-      
     </>
   );
 }
