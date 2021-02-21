@@ -78,6 +78,7 @@ export const PuestoArtesanal2 = (props) => {
             if (mesacentral < 11 && producto.prod_principal) {// maximo productos principales mesa central
                 htmlProd.push(<Producto
                     key={producto.prod_id}
+                    prod_id={producto.prod_id}
                     prod_nombre={producto.prod_nombre}
                     prod_descrip={producto.prod_descrip}
                     prod_scale={producto.prod_scale}

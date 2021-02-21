@@ -17,19 +17,17 @@ export const PuestoArtesanal = (props) => {
         if (props.productos !== undefined)
             setProductoHTML(generarProductos());
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.productos]);
-
+    }, [props.productos]);  
     function generarProductos() {
       /*  let xM1 = props.xPuesto - 10;
         let yM1 = props.yPuesto - 0.5;
         let zM1 = props.zPuesto + 6.5;
         let contadorMesalateral = 0;//contador mesa lateral para devolverse de der-izq
         let mesalateralCP = 0;//cantidad de productos maximo en ambas mesas laterales
-
 */
         let htmlProd = [];
         
-        let ismesa = true;
+      //  let ismesa = true;
         let mesacentral = 0;// contador producto principales, cantidad maxima en la mesa central
         let xC1 = props.xPuesto;
         let yC1 = props.yPuesto - 0.85; //OK
@@ -84,6 +82,7 @@ export const PuestoArtesanal = (props) => {
             if (mesacentral < 50 && producto.prod_principal) {// maximo productos principales mesa central
                 htmlProd.push(<Producto
                     key={producto.prod_id}
+                    prod_id={producto.prod_id}
                     prod_nombre={producto.prod_nombre}
                     prod_descrip={producto.prod_descrip}
                     prod_scale={producto.prod_scale}

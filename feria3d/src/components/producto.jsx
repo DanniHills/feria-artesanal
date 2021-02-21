@@ -1,13 +1,17 @@
 /* esLint-disable jsx-a11y/alt-text */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'aframe';
 import { Entity } from 'aframe-react';
 import { Modal, Descriptions } from 'antd';
 import '@google/model-viewer';
+import ArtesanoService from '../services/artesanoService';
+import { useParams } from 'react-router-dom';
 export const Producto = (props) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const uploadsUrl = 'http://localhost/';
-
+    //const uploadsUrl = 'http://localhost/';
+    const [informacion, setInformacion]=useState([]);
+    const artesanoService= new ArtesanoService();
+    const []= useState([]);
     const showModal = () => {
       setIsModalVisible(true);
     };
@@ -25,6 +29,15 @@ export const Producto = (props) => {
       console.log('Clicked!');
       showModal();
     } 
+console.log('id: '+props.prod_id);
+    useEffect(()=>{
+      artesanoService.informacionProductoArtesano(props.prod_id).then((res) => {
+        console.log(res);
+        setInformacion(res);
+      }).catch((e) => {
+        console.log(e);
+      });
+    }, [props.productos]);
 
     return (
         <>  
@@ -36,15 +49,15 @@ export const Producto = (props) => {
                     click: handleClick.bind(this)
                   }}
             />            
-            
+            {informacion &&(
             <Modal 
-                title={props.prod_nombre} 
+                title={informacion.prod_nombre} 
                 visible={isModalVisible} 
                 onOk={handleOk} 
                 onCancel={handleCancel}
             > 
             
-                <p>{props.prod_descrip}</p>
+                <p>{informacion.prod_descrip}</p>
                 <model-viewer 
                     style={{width: '100%', height: '300px'}} 
                     id="reveal" 
@@ -56,11 +69,11 @@ export const Producto = (props) => {
                 />
                  <Descriptions >
                     <Descriptions.Item label={'Información de Contacto'} span={6}> </Descriptions.Item>
-                    <Descriptions.Item label={'Artesano ' } span={6}> Héctor Toro</Descriptions.Item>
-                    <Descriptions.Item label={'Telefono' } span={6}>  945677654 </Descriptions.Item>
-                    <Descriptions.Item label={'Correo' } span={6}>  toro@gmail.com </Descriptions.Item>
+                    <Descriptions.Item label={'Artesano '}  span={6}> {informacion.art_nombre} {informacion.art_apellido}</Descriptions.Item>
+                    <Descriptions.Item label={'Telefono ' }span={6}>{informacion.art_fono}</Descriptions.Item>
+                    <Descriptions.Item label={'Correo'}span={6}> {informacion.art_correo}</Descriptions.Item>
                 </Descriptions>
-            </Modal>
+            </Modal>)}
         </>
     );
 }

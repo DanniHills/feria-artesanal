@@ -4,7 +4,7 @@ import { Entity, Scene } from "aframe-react";
 import { PuestoArtesanal as PuestoArtesanalIzq } from "../components/puestoartesanalIzq";
 import { PuestoArtesanal2 as PuestoArtesanalDer } from "../components/puestoartesanalDer";
 import PuestosService from "../services/PuestosService";
-import { Puesto } from '../components/puestoIndividual'
+
 
 function HomeComponent() {
   const [puestosHTML, setPuestosHTML] = useState([]);

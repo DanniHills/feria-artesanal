@@ -14,7 +14,7 @@ export default class PuestosService {
     }
 
     static async obtenerPuestoConProductos(pArt_id) {
-        const res = await fetch(`${PuestosService.rute}/getProductos/` + pArt_id);
+        const res = await fetch(`${PuestosService.rute}/getProductos/${pArt_id}`);
         if (res.ok) {
             const jsonData = await res.json();
             return jsonData;

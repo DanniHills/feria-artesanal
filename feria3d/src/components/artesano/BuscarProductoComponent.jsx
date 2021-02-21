@@ -72,7 +72,6 @@ function BuscarProductoComponent() {
  
 
       useEffect( () => {
-      
         artesanoService.buscarProductos().then(response => {
           setDataSource(response)
           setLoading(false);

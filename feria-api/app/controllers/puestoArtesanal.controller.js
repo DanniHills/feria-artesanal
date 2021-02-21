@@ -64,7 +64,7 @@ exports.findAllWithProd = (req, res) => {
     // var condition = nombre ? { nombre: { [Op.like]: `%${nombre}%` } } : null;
     //PuestoArtesanal.findAll({ where: condition })
     const pArtId = req.params.pArt_id;
-    PuestoArtesanal.findAll({  where: { pArt_id: pArtId }, include: [{model :Productos}]})
+    PuestoArtesanal.findOne({  where: { pArt_id: pArtId }, include: [{model :Productos}]})
         .then(data => {
             res.send(data);
         })
