@@ -7,14 +7,14 @@ module.exports = app => {
     router.post("/", PuestoArtesanal.create);
 
     // Retrieve all Puesto Artesanal
-    router.get("/", PuestoArtesanal.findAll);
-    router.get("/all/:pArt_id", PuestoArtesanal.findAllWithProd);
+    router.get("/getProductos/", PuestoArtesanal.findAll);
+    router.get("/getProductos/:pArt_id", PuestoArtesanal.findAllWithProd);
 
     // Retrieve all published Puesto Artesanal
     // router.get("/published", PuestoArtesanal.findAllPublished);
 
     // Retrieve a single Puesto Artesanal with id
-    router.get("/:pArt_id", PuestoArtesanal.findOne);
+    //router.get("/:pArt_id", PuestoArtesanal.findOne);
 
     // Update a Puesto Artesanal with id
     router.put("/:pArt_id", PuestoArtesanal.update);

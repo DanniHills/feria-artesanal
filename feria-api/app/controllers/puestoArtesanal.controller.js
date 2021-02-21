@@ -48,7 +48,7 @@ exports.findAll = (req, res) => {
     // var condition = nombre ? { nombre: { [Op.like]: `%${nombre}%` } } : null;
     //PuestoArtesanal.findAll({ where: condition })
 
-    PuestoArtesanal.findAll()
+    PuestoArtesanal.findAll({include: [{model :Productos}]})
         .then(data => {
             res.send(data);
         })

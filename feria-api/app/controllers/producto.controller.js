@@ -5,7 +5,7 @@ const MaterialesProductos = db.materialesProductos;
 const Artesano = db.artesanos;
 const Op = db.Sequelize.Op;
 var mkdirp = require('mkdirp');
-const { materialesProductos } = require("../models");
+const { materialesProductos, productos, sequelize } = require("../models");
 
 
 // Create and Save a new Tutorial
@@ -82,6 +82,20 @@ exports.findAll = (req, res) => {
             });
         });
 };
+
+exports.detalleArtesanoMateriales = async (req, res) => {
+    const prodId = req.params.prod_id;
+
+    var prod = await sequelize.query(`SELECT p.*, a.* ` 
+    + `FROM producto p, puesto_artesanal pa, artesano a ` 
+    + `WHERE p.prod_id = ${prodId} AND p.pArt_id = pa.pArt_id AND a.art_id = pa.art_id`);
+    
+    var materiales  = await sequelize.query(`SELECT m.mat_nombre `
+    + `FROM producto p, materiales_productos mp, material m ` 
+    + `WHERE p.prod_id = ${prodId} AND mp.prod_id = p.prod_id AND m.mat_id = mp.mat_id`);
+    prod[0][0].materiales = materiales[0];
+    res.send(prod[0][0]);
+}
 
 // Find a single producto with an id
 exports.findOne = (req, res) => {
