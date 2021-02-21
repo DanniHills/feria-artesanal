@@ -23,6 +23,8 @@ import DetalleProd from './components/Catalogo/Detalleprod';
 import UbicacionPuestosComponent from './components/administrador/UbicacionPuestosComponent';
 import UbicacionProductosComponent from './components/artesano/UbicacionProductosComponent';
 import VerProductoComponent from './components/artesano/VerProductoComponent';
+import PuestoIndividual from './components/puestoIndividual';
+
 const sessionService = new SessionService();
 
 function App() {
@@ -58,6 +60,7 @@ function App() {
             <Route path="/catalogo" exact component={CatalogoComponent} />, 
             <Route path="/detalle/:prod_id" component={DetalleProd} />,
             <Route path="/artesano/verProducto/:prod_id" component={VerProductoComponent}/>,
+            <Route path="/puesto/:pArt_id"  component={PuestoIndividual}/>,
 
     ];
     
@@ -105,7 +108,6 @@ function App() {
                 <Switch>
                     <Route path="/" exact component={HomeComponent} />
                     <Route path="/logout" exact render={logout} />
-                    
                 </Switch>
                 {loggedLayout}
             </Router>
@@ -128,6 +130,7 @@ function App() {
                 <Switch>
                     <Route path="/catalogo" exact component={CatalogoComponent} />
                     <Route path="/detalle/:prod_id" component={DetalleProd} />
+                    <Route path="/puesto/:pArt_id"  component={PuestoIndividual}/>
                 </Switch>
            
                         </Content>
