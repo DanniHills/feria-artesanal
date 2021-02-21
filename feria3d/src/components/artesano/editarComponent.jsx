@@ -21,7 +21,7 @@ const artesanoService = new ArtesanoService();
 const materialService = new MaterialService();
 
 function EditarComponent() {
-
+  const history = new useHistory();
   const { Dragger } = Upload;
   const { Option } = Select;
   const [form] = Form.useForm();
@@ -86,7 +86,7 @@ function EditarComponent() {
       });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const handleOk = (e) => {
-    setIsModalVisible(false);
+    //setIsModalVisible(false);
     setLoading(true);
     let formulario = new FormData();
     formulario.append("prod_nombre", producto.prod_nombre);
@@ -109,19 +109,19 @@ function EditarComponent() {
         console.log(response);
         if (response.status === 500) {
           message.error("Ocurrió un error al agregar producto.");
-          //setLoading(false);
+          setLoading(false);
           return;
         }
-        //history.go(0);
+  
+        history.go(0);
         message.success("Producto creado correctamente");
-        //setArchivoImagen([]);
-        //setArchivoModelo([]);
-        //form.resetFields();
+        setArchivoImagen([]);
+        setArchivoModelo([]);
         //setLoading(false);
       })
       .catch((err) => {
         message.error("Error de conexión con el servidor.");
-        //setLoading(false);
+        setLoading(false);
       });
   };
 
@@ -174,6 +174,7 @@ function EditarComponent() {
 
   function modalOk(){
     form.submit();
+    
   }
 
   return (
@@ -186,6 +187,8 @@ function EditarComponent() {
         visible={isModalVisible}
         onCancel={handleCancel}
         onOk={modalOk}
+        cancelButtonProps={ {disabled: loading }}
+        okButtonProps={ {loading: loading, disabled: loading}}
       >
         <Form form={form} layout="vertical" onFinish={handleOk}>
           <Row gutter={24}>
