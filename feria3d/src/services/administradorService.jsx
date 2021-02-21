@@ -43,7 +43,7 @@ export default class AdministradorService{
         .then(response => response.json())
     }
     buscarPuesto(){
-        return fetch('http://localhost:8080/api/PuestoArtesanal', {method: 'GET', headers: { 'Content-Type': 'application/json' }})
+        return fetch('http://localhost:8080/api/PuestoArtesanal/getProductos/', {method: 'GET', headers: { 'Content-Type': 'application/json' }})
         .then(response => response.json())
     }
     eliminarPuesto(pArt_id){
