@@ -1,18 +1,18 @@
-
-
 import React, { useEffect, useState } from "react";
 import "aframe";
-import { Entity } from "aframe-react";
+import { Entity, Scene } from "aframe-react";
 import { Producto } from "./producto";
-export const PuestoArtesanal = (props) => {
+import PuestosService from "../services/PuestosService";
+import { PuestoArtesanal } from "./puestoartesanalIzq";
+export const PuestoArtespueanal = (props) => {
   const uploadUrl = "http://localhost/";
   const urlPuesto = "../img/paredes2021.glb";
   //const zlogo=(`${props.zPuesto -3}`);
   //const xlogo="-34";
   //const ylogo="8";
-
   const [productoHTML, setProductoHTML] = useState([]);
   useEffect(() => {
+
     if (props.productos !== undefined) setProductoHTML(generarProductos());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.productos]);
@@ -21,7 +21,7 @@ export const PuestoArtesanal = (props) => {
     let xM1 = props.xPuesto+16;
     let yM1 = props.yPuesto-0.5;
     let zM1 = props.zPuesto-13;
-console.log(xM1,yM1);
+
     let htmlProd = [];
     let contadorMesalateral = 0; //contador mesa lateral para devolverse de der-izq
     let mesalateralCP = 0; //cantidad de productos maximo en ambas mesas laterales
@@ -54,9 +54,9 @@ console.log(xM1,yM1);
         zC1 = props.zPuesto + 4.5;
         xC1 +=2;
       }
-      if (contadorEstante === 6) {
+      /*if (contadorEstante === 6) {
         contadorEstante = 0;
-      }
+      }*/
       if (mesalateralCP < 50 && !producto.prod_principal) {
         //colocar maximos de productos no principales en mesas laterales n
         htmlProd.push(
@@ -66,6 +66,7 @@ console.log(xM1,yM1);
             prod_nombre={producto.prod_nombre}
             prod_descrip={producto.prod_descrip}
             prod_scale={producto.prod_scale}
+            pArt_id={producto.pArt_id}
             urlProducto={uploadUrl + producto.prod_modelo3D}
             xM1={xM1}
             yM1={yM1}
@@ -94,6 +95,7 @@ console.log(xM1,yM1);
             prod_descrip={producto.prod_descrip}
             prod_scale={producto.prod_scale}
             idProducto={producto.prod_id}
+            pArt_id={producto.pArt_id}
             urlProducto={uploadUrl + producto.prod_modelo3D}
             xM1={xC1}
             yM1={yC1}
@@ -111,7 +113,7 @@ console.log(xM1,yM1);
         contadorMesaCentral++;
 
         //agregar variable del estante y coordenadas
-      } else if (mesaEstante < 10 && producto.prod_principal) {
+      } /*else if (mesaEstante < 10 && producto.prod_principal) {
         htmlProd.push(
           <Producto
             key={producto.prod_id}
@@ -119,6 +121,7 @@ console.log(xM1,yM1);
             prod_nombre={producto.prod_nombre}
             prod_descrip={producto.prod_descrip}
             prod_scale={producto.prod_scale}
+            pArt_id={producto.pArt_id}
             urlProducto={uploadUrl + producto.prod_modelo3D}
             xM1={xE1}
             yM1={yE1}
@@ -132,15 +135,30 @@ console.log(xM1,yM1);
         } /*else{
                     zE1-=150;
                     ismesaC= !ismesaC
-                }*/
+                }
         contadorEstante++;
-      }
+      }*/
     });
     return htmlProd;
   }
   return (
     <>
-      <a-assets>
+<Scene>
+        <a-assets>
+          <img
+            alt=""
+            id="sky"
+            src={process.env.PUBLIC_URL + "/img/cielo.jpg"}
+            crossOrigin=""
+          ></img>
+          <img
+            alt=""
+            id="groundTexture"
+            src={process.env.PUBLIC_URL + "/img/2floor.jpg"}
+            crossOrigin=""
+          ></img>
+        </a-assets>
+        <a-assets>
         <a-asset-item
           id="puestotex"
           src={`${process.env.PUBLIC_URL} ${urlPuesto}`}
@@ -150,7 +168,7 @@ console.log(xM1,yM1);
       <Entity
         key={`${props.puestoid}`}
         gltf-model="#puestotex"
-        position={`${props.xPuesto} ${props.yPuesto} ${props.zPuesto}`}
+        position="0 5.98 0"
         scale="0.8 0.8 0.8 "
         Rotation="0 -90 0 "
       ></Entity>
@@ -162,8 +180,24 @@ console.log(xM1,yM1);
           geometry={{ radiusInner: 0.005, radiusOuter: 0.007 }}
         />
       </Entity>
+        <Entity
+          primitive="a-plane"
+          color="#a59182"
+          position="0 0 0"
+          rotation="-90 0 0"
+          height="1000"
+          width="1000"
+        />
+        <Entity primitive="a-sky" src="#sky" radius="600" />
+
+        <Entity
+          primitive="a-light"
+          type="ambient"
+          light="color: #ffffff"
+          intensity="0.88"
+        />
+      </Scene>      
        </>
   );
 };
-
-//cambiar codigo al puesto izquierdo
+export default PuestoArtespueanal;
