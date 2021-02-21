@@ -22,7 +22,7 @@ export default class ArtesanoService{
     }
 
      actualizarProductos(prod_id, producto){
-        return fetch('http://localhost:8080/api/Producto/' + prod_id, {method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: producto })
+        return fetch('http://localhost:8080/api/Producto/' + prod_id, {method: 'PUT', headers: { }, body: producto })
         .then(response => response.json())
     }
     buscarartesanodelpuesto(art_id){
