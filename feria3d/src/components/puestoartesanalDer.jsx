@@ -10,7 +10,9 @@ export const PuestoArtesanal2 = (props) => {
     //const zlogo=(`${props.zPuesto -3}`);
     //const xlogo="-34";
     //const ylogo="8";
-
+    const XEntrar=(`${props.xEntrar}`);
+    const YEntrar=(`${props.yEntrar}`);
+    const ZEntrar=(`${props.zEntrar}`);
     const [productoHTML, setProductoHTML] = useState([]);
     useEffect(() => {
         if (props.productos !== undefined)
@@ -37,7 +39,7 @@ export const PuestoArtesanal2 = (props) => {
 
         let ismesaC = true; // mesa central producto principal al lado 
         let contadorMesaCentral = 0;
-        let contadorEstante = 0;
+        //let contadorEstante = 0;
 
         props.productos.forEach(producto => {
             if (contadorMesalateral === 4) {
@@ -97,6 +99,8 @@ export const PuestoArtesanal2 = (props) => {
         return htmlProd;
     }
     const history = useHistory();
+
+    console.log()
     const handleClick = useCallback(() => history.push('/puesto/' + props.pArt_id), [history]);
     return (
         <>
@@ -113,8 +117,8 @@ export const PuestoArtesanal2 = (props) => {
             </Entity>
             <Entity primitive="a-plane"
                 color="red" 
-                position="-9.58468 2.39977 74.17012" 
-                rotation="-48.92658499960638 90.00021045914971 -90.00021045914971" 
+                position={`${XEntrar} ${YEntrar} ${ZEntrar}`} 
+                rotation="-48.92658499960638 -90.00021045914971 90.00021045914971" 
                 height="10" width="10" material="" geometry="height: 5" scale="0.5 1 0.5"
                 events={{
                     click: handleClick.bind(this)

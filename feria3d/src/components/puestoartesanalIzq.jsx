@@ -8,10 +8,10 @@ export const PuestoArtesanal = (props) => {
 
     const uploadUrl = 'http://localhost/';
     const urlPuesto = "../img/paredes2021.glb";
-    //const zlogo=(`${props.zPuesto -3}`);
-    //const xlogo="-34";
-    //const ylogo="8";
-
+    const XEntrar=(`${props.xEntrar}`);
+    const YEntrar=(`${props.yEntrar}`);
+    const ZEntrar=(`${props.zEntrar}`);
+    
     const [productoHTML, setProductoHTML] = useState([]);
     useEffect(() => {
         if (props.productos !== undefined)
@@ -20,14 +20,15 @@ export const PuestoArtesanal = (props) => {
     }, [props.productos]);
 
     function generarProductos() {
-        let xM1 = props.xPuesto - 10;
+      /*  let xM1 = props.xPuesto - 10;
         let yM1 = props.yPuesto - 0.5;
         let zM1 = props.zPuesto + 6.5;
-
-        let htmlProd = [];
         let contadorMesalateral = 0;//contador mesa lateral para devolverse de der-izq
         let mesalateralCP = 0;//cantidad de productos maximo en ambas mesas laterales
 
+*/
+        let htmlProd = [];
+        
         let ismesa = true;
         let mesacentral = 0;// contador producto principales, cantidad maxima en la mesa central
         let xC1 = props.xPuesto;
@@ -36,12 +37,12 @@ export const PuestoArtesanal = (props) => {
 
         let ismesaC = true; // mesa central producto principal al lado 
         let contadorMesaCentral = 0;
-        let mesaEstante = 0;
+        /*let mesaEstante = 0;
         let contadorEstante = 0;
         let xE1 = props.xPuesto + 1;
         let yE1 = props.yPuesto + 6;
         let zE1 = props.zPuesto - 4;
-        let ismesaE = true;
+        let ismesaE = true;*/
 
 
         props.productos.forEach(producto => {
@@ -149,7 +150,7 @@ export const PuestoArtesanal = (props) => {
             </Entity>
             <Entity primitive="a-plane"
                 color="red" 
-                position="-9.58468 2.39977 74.17012" 
+                position={`${XEntrar} ${YEntrar} ${ZEntrar}`} 
                 rotation="-48.92658499960638 90.00021045914971 -90.00021045914971" 
                 height="10" width="10" material="" geometry="height: 5" scale="0.5 1 0.5"
                 events={{
@@ -162,3 +163,6 @@ export const PuestoArtesanal = (props) => {
         </>
     );
 }
+
+
+//editar pos de plano para el  click

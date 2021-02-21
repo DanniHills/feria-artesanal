@@ -27,7 +27,12 @@ function HomeComponent() {
     let coordyDer = 6.5;
     let coordzDer = 86;
     let htmlP = [];
-
+    let xEntrarI=-9.6;
+    let yEntrarI=2.4;
+    let zEntrarI=74;
+    let xEntrarD=21;
+    let yEntrarD=2.4;
+    let zEntrarD=75.86;
     puestos.forEach((puesto) => {
       if (!esRotado) {
         htmlP.push(
@@ -38,24 +43,32 @@ function HomeComponent() {
             xPuesto={coordX}
             yPuesto={coordY}
             zPuesto={coordZ}
+            xEntrar={xEntrarI}
+            yEntrar={yEntrarI}
+            zEntrar={zEntrarI}
             productos={puesto.productos}
           />
         );
         coordZ -= 35;
+        zEntrarI-=35;
         esRotado = !esRotado;
       } else {
         htmlP.push(
           <PuestoArtesanalDer
             key={puesto.pArt_id}
+            pArt_id={puesto.pArt_id}
             urlLogo={puesto.pArt_logo}
             xPuesto={coordxDer}
             yPuesto={coordyDer}
             zPuesto={coordzDer}
             productos={puesto.productos}
+            xEntrar={xEntrarD}
+            yEntrar={yEntrarD}
+            zEntrar={zEntrarD}
           />
         );
         coordzDer -= 35;
-
+        zEntrarD -= 35; 
         esRotado = !esRotado;
       }
     });
@@ -74,8 +87,9 @@ function HomeComponent() {
           <img
             alt=""
             id="sky"
-            src={process.env.PUBLIC_URL + "/img/cielo.jpg"}
+            src={process.env.PUBLIC_URL + "/img/cielovalpo.jpg"}
             crossOrigin=""
+            repeat= "4 4"
           ></img>
           <img
             alt=""
