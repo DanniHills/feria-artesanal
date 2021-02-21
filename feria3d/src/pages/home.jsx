@@ -4,7 +4,7 @@ import { Entity, Scene } from "aframe-react";
 import { PuestoArtesanal as PuestoArtesanalIzq } from "../components/puestoartesanalIzq";
 import { PuestoArtesanal2 as PuestoArtesanalDer } from "../components/puestoartesanalDer";
 import PuestosService from "../services/PuestosService";
-//import { PuestoArtesanal3} from '../components/puesto3'
+import { Puesto } from '../components/puestoIndividual'
 
 function HomeComponent() {
   const [puestosHTML, setPuestosHTML] = useState([]);
@@ -12,7 +12,6 @@ function HomeComponent() {
     PuestosService.obtenerPuestos()
       .then((res) => {
         console.log(res);
-        // setPuestos(res);
         setPuestosHTML(generarPuestos(res));
       })
       .catch((e) => {
@@ -34,6 +33,7 @@ function HomeComponent() {
         htmlP.push(
           <PuestoArtesanalIzq
             key={puesto.pArt_id}
+            pArt_id={puesto.pArt_id}
             urlLogo={puesto.pArt_logo}
             xPuesto={coordX}
             yPuesto={coordY}
