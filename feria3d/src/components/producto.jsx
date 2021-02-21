@@ -6,7 +6,7 @@ import { Modal, Descriptions } from 'antd';
 import '@google/model-viewer';
 export const Producto = (props) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
-    //const uploadsUrl = 'http://localhost/';
+    const uploadsUrl = 'http://localhost/';
 
     const showModal = () => {
       setIsModalVisible(true);
