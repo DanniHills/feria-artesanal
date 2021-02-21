@@ -36,7 +36,7 @@ function CrearProductoComponent() {
   }, []);
 
   useEffect(() => {
-    puestosService.buscarPuestos().then((response) => {
+    PuestosService.obtenerPuestos().then((response) => {
       let mat = [];
       response.forEach((puesto, index) => {
         mat.push(

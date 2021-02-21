@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   Modal,
   Row,
@@ -11,7 +11,7 @@ import {
   Upload,
   message,
 } from "antd";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import MaterialService from "../../services/MaterialService";
 import ArtesanoService from "../../services/artesanoService";
 import CatalogoService from "../../services/CatalogoService";
@@ -21,6 +21,7 @@ const artesanoService = new ArtesanoService();
 const materialService = new MaterialService();
 
 function EditarComponent() {
+  const history = new useHistory();
   const { Dragger } = Upload;
   const { Option } = Select;
   const [form] = Form.useForm();
@@ -85,7 +86,7 @@ function EditarComponent() {
       });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const handleOk = (e) => {
-    setIsModalVisible(false);
+    //setIsModalVisible(false);
     setLoading(true);
     let formulario = new FormData();
     formulario.append("prod_nombre", producto.prod_nombre);
@@ -94,25 +95,29 @@ function EditarComponent() {
     formulario.append("prod_descrip", producto.prod_descrip);
     formulario.append("prod_principal", principal);
     formulario.append("prod_scale", producto.prod_scale);
-    formulario.append("prod_imagen", producto.prod_imagen)
-    formulario.append("prod_modelo", producto.prod_modelo3D);
+    formulario.append("prod_imagen", archivoImagen[0]);
+    formulario.append("prod_modelo", archivoModelo[0]);
+    formulario.append("prod_imagenOld", producto.prod_imagen);
+    formulario.append("prod_modeloOld", producto.prod_modelo3D);
+    console.log("mostrando formulario ----------------------");
     formulario.forEach(ma=>{console.log(ma)});
-    console.log(producto);
-     artesanoService
+    console.log("prodid "+ prod_id);
+        
+    artesanoService
       .actualizarProductos(prod_id, formulario)
       .then((response) => {
-        console.log(prod_id);
-        console.log(formulario);
+        console.log(response);
         if (response.status === 500) {
           message.error("Ocurrió un error al agregar producto.");
           setLoading(false);
           return;
         }
+  
+        history.go(0);
         message.success("Producto creado correctamente");
         setArchivoImagen([]);
         setArchivoModelo([]);
-        form.resetFields();
-        setLoading(false);
+        //setLoading(false);
       })
       .catch((err) => {
         message.error("Error de conexión con el servidor.");
@@ -166,6 +171,12 @@ function EditarComponent() {
     console.log(producto);
     //setInputs(inputs => ({ ...inputs, [name]: value }));
   }
+
+  function modalOk(){
+    form.submit();
+    
+  }
+
   return (
     <>
       <Button type="primary" onClick={showModal}>
@@ -175,6 +186,9 @@ function EditarComponent() {
         title="Editar Producto"
         visible={isModalVisible}
         onCancel={handleCancel}
+        onOk={modalOk}
+        cancelButtonProps={ {disabled: loading }}
+        okButtonProps={ {loading: loading, disabled: loading}}
       >
         <Form form={form} layout="vertical" onFinish={handleOk}>
           <Row gutter={24}>
@@ -244,8 +258,11 @@ function EditarComponent() {
                 </p>
               </Form.Item>
             </Col>
-            <Col span={6}>
-              <Form.Item name="prod_imagen" label="Imagen">
+            <Col span={12}>
+              <Form.Item
+                name="prod_imagen"
+                label="Imagen"
+              >
                 <Dragger
                   accept=".png,.jpg"
                   beforeUpload={agregarArchivoImagen.bind(this)}
@@ -262,8 +279,11 @@ function EditarComponent() {
                 </Dragger>
               </Form.Item>
             </Col>
-            <Col span={6}>
-              <Form.Item name="prod_modelo" label="Modelo">
+            <Col span={12}>
+              <Form.Item
+                name="prod_modelo"
+                label="Modelo"
+              >
                 <Dragger
                   accept=".gltf,.glb"
                   beforeUpload={agregarArchivoModelo.bind(this)}
@@ -279,17 +299,8 @@ function EditarComponent() {
                   <p className="ant-upload-hint"></p>
                 </Dragger>
               </Form.Item>
-              <Form.Item>
-                <Button
-                  disabled={loading}
-                  loading={loading}
-                  type="primary"
-                  htmlType="submit"
-                >
-                  Crear producto
-                </Button>
-              </Form.Item>
             </Col>
+            
           </Row>
         </Form>
       </Modal>
