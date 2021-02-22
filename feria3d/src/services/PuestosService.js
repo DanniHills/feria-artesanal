@@ -1,6 +1,8 @@
+import config from "../config";
+
 export default class PuestosService {
 
-    static rute = 'http://localhost:8080/api/PuestoArtesanal';
+    static rute =  config.backendUrl + '/api/PuestoArtesanal';
 
     static async obtenerPuestos() {
         const res = await fetch(`${PuestosService.rute}/getProductos/`);

@@ -1,0 +1,54 @@
+services: 
+  frontend:
+    container_name: frontend
+    restart: always
+    build:
+      context: ./feria3d/
+      dockerfile: Dockerfile
+    environment:     
+      VIRTUAL_HOST: feria.localhost
+      REACT_APP_API_URL: http://feriabackend.localhost
+    volumes:
+      - ./uploads/:/var/www/html
+    depends_on: 
+      - backend
+    networks: 
+      - backend_network
+      - frontend_network
+
+  backend:
+    container_name: backend
+    restart: always
+    build:
+      context: ./feria-api/
+      dockerfile: Dockerfile
+    volumes:
+      - ./uploads/:/uploads
+    environment:     
+      VIRTUAL_HOST: feriabackend.localhost
+      MYSQL_HOST: mysql
+    depends_on: 
+      - db
+    networks: 
+      - frontend_network
+      - backend_network
+
+  db:
+    container_name: mysql
+    image: mysql:5.7
+    expose:
+      - 3306
+    networks:
+      - backend_network
+    environment:
+      MYSQL_ROOT_PASSWORD: feria_artesanal
+      MYSQL_DATABASE: prueba
+    volumes:
+      - ./database/:/var/lib/mysql
+
+networks:
+  frontend_network:
+    external:
+      name: nginx-proxy
+  backend_network:
+

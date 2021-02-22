@@ -6,8 +6,8 @@ import { useHistory } from 'react-router-dom';
 
 export const PuestoArtesanal = (props) => {
 
-    const uploadUrl = 'http://localhost/';
-    const urlPuesto = "../img/paredes2021.glb";
+    const uploadUrl = '/uploads/';
+    const urlPuesto = process.env.PUBLIC_URL + "/img/paredes2021.glb";
     const XEntrar=(`${props.xEntrar}`);
     const YEntrar=(`${props.yEntrar}`);
     const ZEntrar=(`${props.zEntrar}`);

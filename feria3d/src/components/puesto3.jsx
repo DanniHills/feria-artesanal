@@ -4,7 +4,7 @@ import 'aframe';
 import { Entity } from 'aframe-react';
 export const PuestoArtesanal3 = (props) => {
     
-    const urlPuesto="../img/paredesok1.glb";
+    const urlPuesto= process.env.PUBLIC_URL + "/img/paredesok1.glb";
      // const urlLogo="../img/logo/flooop.png";
       //const urlPorducto="../img/productos/jarro_tipo_valdivia/scene.gltf";
       //const xPuesto ="-23"; // mover en el x para cambiar de columna

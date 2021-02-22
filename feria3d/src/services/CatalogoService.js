@@ -1,6 +1,8 @@
+import config from "../config";
+
 export default class CatalogoService {
 
-    static rute = 'http://localhost:8080/api/Producto';
+    static rute =  config.backendUrl + '/api/Producto';
 
     static async obtenerCatalogo() {
         const res = await fetch(`${CatalogoService.rute}/`);

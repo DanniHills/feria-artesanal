@@ -5,8 +5,8 @@ import { Producto } from './producto';
 import { useHistory } from 'react-router-dom';
 
 export const PuestoArtesanal2 = (props) => {
-    const uploadUrl = 'http://localhost/';
-    const urlPuesto = "../img/paredes2021.glb";
+    const uploadUrl = '/uploads/';
+    const urlPuesto = process.env.PUBLIC_URL + "/img/paredes2021.glb";
     //const zlogo=(`${props.zPuesto -3}`);
     //const xlogo="-34";
     //const ylogo="8";

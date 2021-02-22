@@ -6,8 +6,8 @@ import PuestosService from "../services/PuestosService";
 import { useParams } from "react-router-dom";
 
 export const PuestoArtespueanal = (props) => {
-  const uploadUrl = "http://localhost/";
-  const urlPuesto = "../img/paredes2021.glb";
+  const uploadUrl = "/uploads/";
+  const urlPuesto = process.env.PUBLIC_URL + "/img/paredes2021.glb";
   const pArt_id = useParams().pArt_id;
   const [productoHTML, setProductoHTML] = useState([]);
   useEffect(() => {
