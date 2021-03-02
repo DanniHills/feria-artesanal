@@ -2,13 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import { Input, Col, Row, Table, Space, Popconfirm, message } from 'antd';
 import ArtesanoService from '../../services/artesanoService';
-//import SessionService from '../../services/SessionService'
+import SessionService from '../../services/SessionService'
 import { Link } from 'react-router-dom';
 import { SearchOutlined } from '@ant-design/icons';
 
 
 const artesanoService = new ArtesanoService();
-//const sessionService = new SessionService();
+const sessionService = new SessionService();
 
 function BuscarProductoComponent() {
     
@@ -54,6 +54,11 @@ function BuscarProductoComponent() {
           width: '35%',
         },
         {
+          title: 'Nombre puesto',
+          dataIndex: 'pArt_nombre',
+          width: '35%',
+        },
+        {
           title: 'Acciones',
           dataIndex: 'acciones',
           render: (text, record) =>
@@ -72,8 +77,27 @@ function BuscarProductoComponent() {
  
 
       useEffect( () => {
-        artesanoService.buscarProductos().then(response => {
-          setDataSource(response)
+        console.log(sessionService.getUserData().art_id);
+        artesanoService.buscarProductosArtId(sessionService.getUserData().art_id).then(response => {
+          console.log(response);
+          let arrayProductos = [];
+          
+          response.forEach(puesto => {
+            
+            console.log("primer foreach");
+            puesto.productos.forEach(p => {
+              let producto = {
+                prod_id : p.prod_id,
+                prod_nombre : p.prod_nombre,
+                prod_descrip : p.prod_descrip,
+                pArt_nombre: puesto.pArt_nombre
+              };
+              arrayProductos.push(producto);
+              //arrayProductos.concat(producto);
+            });
+          });
+          console.log("arrayprod ",arrayProductos);
+          setDataSource(arrayProductos)
           setLoading(false);
         }).catch(err => {
           setLoading(false);

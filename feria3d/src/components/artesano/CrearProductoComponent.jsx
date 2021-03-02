@@ -5,7 +5,9 @@ import ArtesanoService from "../../services/artesanoService";
 import { InboxOutlined } from "@ant-design/icons";
 import MaterialService from "../../services/MaterialService";
 import PuestosService from "../../services/PuestosService";
+import SessionService from "../../services/SessionService";
 
+const sessionService = new SessionService();
 const artesanoService = new ArtesanoService();
 const materialesService = new MaterialService();
 const puestosService = new PuestosService();
@@ -36,16 +38,16 @@ function CrearProductoComponent() {
   }, []);
 
   useEffect(() => {
-    PuestosService.obtenerPuestos().then((response) => {
-      let mat = [];
+    puestosService.buscarPuestosArtesanoId(sessionService.getUserData().art_id).then((response) => {
+      let pArt = [];
       response.forEach((puesto, index) => {
-        mat.push(
+        pArt.push(
           <Option key={index} value={puesto.pArt_id}>
             {puesto.pArt_nombre}
           </Option>
         );
       });
-      setPuestoArtesanal(mat);
+      setPuestoArtesanal(pArt);
     });
   }, []);
 
