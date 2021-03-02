@@ -28,11 +28,11 @@ function CatalogoComponent() {
     puestos.forEach((producto) => {
       if (producto.prod_std) {
         Catalogo.push(
-          <Col span={4}>
+          <Col span={6}>
             <Link to={"/detalle/" + producto.prod_id}>
               <Card 
                 hoverable
-                cover={<img alt="example" src={uploadsUrl + producto.prod_imagen} />}
+                cover={<img  style={{width: '100%', height: '250px'}} alt="example" src={uploadsUrl + producto.prod_imagen} />}
               >
                 <Meta title={producto.prod_nombre} />
               </Card>
