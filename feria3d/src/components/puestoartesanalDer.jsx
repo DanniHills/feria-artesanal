@@ -6,13 +6,11 @@ import { useHistory } from 'react-router-dom';
 
 export const PuestoArtesanal2 = (props) => {
     const uploadUrl = 'http://localhost/';
-    const urlPuesto = "../img/paredes2021.glb";
-    //const zlogo=(`${props.zPuesto -3}`);
-    //const xlogo="-34";
-    //const ylogo="8";
+    const urlPuestoD = "../img/conmesa.glb";
     const XEntrar=(`${props.xEntrar}`);
     const YEntrar=(`${props.yEntrar}`);
     const ZEntrar=(`${props.zEntrar}`);
+
     const [productoHTML, setProductoHTML] = useState([]);
     useEffect(() => {
         if (props.productos !== undefined)
@@ -22,17 +20,15 @@ export const PuestoArtesanal2 = (props) => {
 
     function generarProductos() {
         console.log(props);
-        let xM1 = props.xPuesto - 11; //24.2
+        /*let xM1 = props.xPuesto - 11; //24.2
         let yM1 = props.yPuesto - 0.5; //0.5
         let zM1 = props.zPuesto - 30; //83.4;
-
-        let htmlProd = [];
         let contadorMesalateral = 0;//contador mesa lateral para devolverse de der-izq
         let mesalateralCP = 0;//cantidad de productos maximo en ambas mesas laterales
-
         let ismesa = true;
+        */
+        let htmlProd = [];
         let mesacentral = 0;// contador producto principales, cantidad maxima en la mesa central
-
         let xC1 = props.xPuesto + 5;
         let yC1 = props.yPuesto - 0.95;
         let zC1 = props.zPuesto - 4;
@@ -42,17 +38,17 @@ export const PuestoArtesanal2 = (props) => {
         //let contadorEstante = 0;
 
         props.productos.forEach(producto => {
-            if (contadorMesalateral === 4) {
+           /* if (contadorMesalateral === 4) {
                 contadorMesalateral = 0;
                 zM1 = props.zPuesto + 10;
                 xM1 += 2;
-            }
+            }*/
             if (contadorMesaCentral === 2) {
                 contadorMesaCentral = 0;
                 zC1 = props.zPuesto;
                 xC1 += 2;
             }
-            if (mesalateralCP < 20 && !producto.prod_principal) { //colocar maximos de productos no principales en mesas laterales n
+            /*if (mesalateralCP < 20 && !producto.prod_principal) { //colocar maximos de productos no principales en mesas laterales n
                 htmlProd.push(<Producto
                     key={producto.prod_id}
                     idProducto={producto.prod_id}
@@ -72,7 +68,7 @@ export const PuestoArtesanal2 = (props) => {
                 }
 
                 contadorMesalateral++;
-            }
+            }*/
 
             //MESA CENTRAL + PRODUCTOS PRINCIPALES
             if (mesacentral < 11 && producto.prod_principal) {// maximo productos principales mesa central
@@ -83,7 +79,7 @@ export const PuestoArtesanal2 = (props) => {
                     prod_descrip={producto.prod_descrip}
                     prod_scale={producto.prod_scale}
                     idProducto={producto.prod_id}
-                    pArt_id ={producto.pArt_id}
+                    pArt_id={producto.pArt_id}
                     urlProducto={uploadUrl + producto.prod_modelo3D} xM1={xC1} yM1={yC1} zM1={zC1} />)
 
                 if (ismesaC) {
@@ -100,18 +96,16 @@ export const PuestoArtesanal2 = (props) => {
         return htmlProd;
     }
     const history = useHistory();
-
-    console.log()
     const handleClick = useCallback(() => history.push('/puesto/' + props.pArt_id), [history]);
     return (
         <>
             <a-assets>
-                <a-asset-item id="puestotex" src={`${process.env.PUBLIC_URL} ${urlPuesto}`}></a-asset-item>
+                <a-asset-item id="puestoDer" src={`${process.env.PUBLIC_URL} ${urlPuestoD}`}></a-asset-item>
             </a-assets>
             {productoHTML}
             <Entity
                 key={`${props.puestoid}`}
-                gltf-model="#puestotex"
+                gltf-model="#puestoDer"
                 position={`${props.xPuesto} ${props.yPuesto} ${props.zPuesto}`}
                 scale="0.8 0.8 0.8 "
                 Rotation="0 180 0 " >

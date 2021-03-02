@@ -7,11 +7,12 @@ import { useHistory } from 'react-router-dom';
 export const PuestoArtesanal = (props) => {
 
     const uploadUrl = 'http://localhost/';
-    const urlPuesto = "../img/paredes2021.glb";
+    const urlPuesto = "../img/conmesa.glb";
+    const urlshop = "../img/shop.jpg";
     const XEntrar=(`${props.xEntrar}`);
     const YEntrar=(`${props.yEntrar}`);
     const ZEntrar=(`${props.zEntrar}`);
-    
+    console.log("izq"+urlPuesto);
     const [productoHTML, setProductoHTML] = useState([]);
     useEffect(() => {
         if (props.productos !== undefined)
@@ -19,20 +20,19 @@ export const PuestoArtesanal = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.productos]);  
     function generarProductos() {
-      /*  let xM1 = props.xPuesto - 10;
+      /*let xM1 = props.xPuesto - 10;
         let yM1 = props.yPuesto - 0.5;
         let zM1 = props.zPuesto + 6.5;
         let contadorMesalateral = 0;//contador mesa lateral para devolverse de der-izq
         let mesalateralCP = 0;//cantidad de productos maximo en ambas mesas laterales
-*/
+        let ismesa = true;
+        */
         let htmlProd = [];
-        
-      //  let ismesa = true;
         let mesacentral = 0;// contador producto principales, cantidad maxima en la mesa central
-        let xC1 = props.xPuesto;
-        let yC1 = props.yPuesto - 0.85; //OK
+        let xC1 = props.xPuesto+11;
+        let yC1 = props.yPuesto +0.4; //OK
         let zC1 = props.zPuesto - 4;
-
+ console.log('central:'+ xC1,yC1,zC1);
         let ismesaC = true; // mesa central producto principal al lado 
         let contadorMesaCentral = 0;
         /*let mesaEstante = 0;
@@ -60,7 +60,7 @@ export const PuestoArtesanal = (props) => {
             if(mesalateralCP<50 && !producto.prod_principal){ //colocar maximos de productos no principales en mesas laterales n
                 htmlProd.push(<Producto  
                     key ={producto.prod_id}
-                    idProducto={producto.prod_id}
+                    prod_id={producto.prod_id}
                     prod_nombre={producto.prod_nombre}
                     prod_descrip={producto.prod_descrip}
                     prod_scale ={producto.prod_scale}
@@ -79,7 +79,7 @@ export const PuestoArtesanal = (props) => {
          }*/
 
             //MESA CENTRAL + PRODUCTOS PRINCIPALES
-            if (mesacentral < 50 && producto.prod_principal) {// maximo productos principales mesa central
+            if (mesacentral < 11 && producto.prod_principal) {// maximo productos principales mesa central
                 htmlProd.push(<Producto
                     key={producto.prod_id}
                     prod_id={producto.prod_id}
@@ -90,9 +90,8 @@ export const PuestoArtesanal = (props) => {
                     pArt_id={producto.pArt_id}
                     urlProducto={uploadUrl + producto.prod_modelo3D} xM1={xC1} yM1={yC1} zM1={zC1} />)
 
-
                 if (ismesaC) {
-                    zC1 -= 3;
+                    xC1 -= 2;
                     ismesaC = !ismesaC
                 } else {
                     zC1 -= 20;
@@ -136,25 +135,34 @@ export const PuestoArtesanal = (props) => {
     return (
         <>
             <a-assets>
-                <a-asset-item id="puestotex" src={`${process.env.PUBLIC_URL} ${urlPuesto}`}></a-asset-item>
+                <a-asset-item id="puestoIzq" src={`${process.env.PUBLIC_URL} ${urlPuesto}`}></a-asset-item>
             </a-assets>
             {productoHTML}
             <Entity
                 key={`${props.puestoid}`}
-                gltf-model="#puestotex"
+                gltf-model="#puestoIzq"
                 position={`${props.xPuesto} ${props.yPuesto} ${props.zPuesto}`}
                 scale="0.8 0.8 0.8 "
                 Rotation="0 0 0 "
             >
+            <Entity
+           gltf-model="#arbol"
+           position={`${props.xPuesto} ${props.yPuesto} ${props.zPuesto}`}
+           scale="0.6 0.6 0.6 "
+           Rotation="0 -90 0 " 
+           ></Entity>    
             </Entity>
             <Entity primitive="a-plane"
-                color="red" 
+                src={`${process.env.PUBLIC_URL} ${urlshop}`}
+                color="#f0b7b7" 
                 position={`${XEntrar} ${YEntrar} ${ZEntrar}`} 
-                rotation="-48.92658499960638 90.00021045914971 -90.00021045914971" 
+                rotation="-20 93.00021045914971 0" 
                 height="10" width="10" material="" geometry="height: 5" scale="0.5 1 0.5"
                 events={{
                     click: handleClick.bind(this)
                   }}>
+
+geometry="height:  1000;  width:  1000;
             </Entity>
 
 

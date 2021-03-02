@@ -12,8 +12,8 @@ export default class ArtesanoService{
         return fetch('http://localhost:8080/api/Producto/'+ prod_id, {method: 'GET', headers: { 'Content-Type': 'application/json' }})
         .then(response => response.json())
     }
-    buscarProductoArtiD(art_id){
-        return fetch('http://localhost:8080/api/Producto/'+ art_id, {method: 'GET', headers: { 'Content-Type': 'application/json' }})
+    buscarProductosArtId(art_id){
+        return fetch('http://localhost:8080/api/Producto/Artesano/'+ art_id, {method: 'GET', headers: { 'Content-Type': 'application/json' }})
         .then(response => response.json())
     }
     eliminarProductos(prod_id){

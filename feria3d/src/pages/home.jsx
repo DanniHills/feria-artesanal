@@ -29,10 +29,12 @@ function HomeComponent() {
     let htmlP = [];
     let xEntrarI=-9.6;
     let yEntrarI=2.4;
-    let zEntrarI=74;
+    let zEntrarI=79;
     let xEntrarD=21;
     let yEntrarD=2.4;
     let zEntrarD=75.86;
+    console.log('der:'+coordxDer, coordyDer, coordzDer);
+    console.log('izq:'+coordX, coordY, coordZ);
     puestos.forEach((puesto) => {
       if (!esRotado) {
         htmlP.push(
@@ -113,7 +115,7 @@ function HomeComponent() {
           primitive="a-light"
           type="ambient"
           light="color: #ffffff"
-          intensity="0.88"
+          intensity="0.8"
         />
 
         <Entity primitive="a-camera" position="6.9 6.9 122">

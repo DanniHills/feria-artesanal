@@ -24,7 +24,10 @@ export default class PuestosService {
         }
     }
 
-
+    buscarPuestosArtesanoId(art_id){
+        return fetch(`${PuestosService.rute}/Artesano/${art_id}`, {method: 'GET', headers: { 'Content-Type': 'application/json' }})
+        .then(response => response.json())
+    } 
 
     buscarPuestos(){
         return fetch(`${PuestosService.rute}`, {method: 'GET', headers: { 'Content-Type': 'application/json' }})

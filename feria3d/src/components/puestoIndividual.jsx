@@ -4,6 +4,11 @@ import { Entity, Scene } from "aframe-react";
 import { Producto } from "./producto";
 import PuestosService from "../services/PuestosService";
 import { useParams } from "react-router-dom";
+import modelo from "../assets/puesto/paredes2021.glb";
+import piso from "../assets/img/Ground041_2K_Color.png";
+import pisonormal from "../assets/normal/normalpiso.png";
+import arbol from "../assets/img/arbol.glb";
+
 
 export const PuestoArtespueanal = (props) => {
   const uploadUrl = "http://localhost/";
@@ -12,7 +17,7 @@ export const PuestoArtespueanal = (props) => {
   const [productoHTML, setProductoHTML] = useState([]);
   useEffect(() => {
     PuestosService.obtenerPuestoConProductos(pArt_id).then((res) => {
-      console.log("response ",res.productos);
+      console.log("response ", res.productos);
       setProductoHTML(generarProductos(res.productos));
     }).catch((e) => {
       console.log(e);
@@ -21,8 +26,8 @@ export const PuestoArtespueanal = (props) => {
   function generarProductos(productos) {
     let xM1 = 0;
     let yM1 = 6.048;
-    let zM1 =0 ;
-  console.log(xM1,yM1,zM1)
+    let zM1 = 0;
+    console.log(xM1, yM1, zM1)
     let htmlProd = [];
     let contadorMesalateral = 0; //contador mesa lateral para devolverse de der-izq
     let mesalateralCP = 0; //cantidad de productos maximo en ambas mesas laterales
@@ -50,14 +55,14 @@ export const PuestoArtespueanal = (props) => {
 
         zM1 += 3;
       }
-     /* if (contadorMesaCentral === 2) {
-        contadorMesaCentral = 0;
-        zC1 = zC1 + 4.5;
-        xC1 += 2;
-      }
-      if (contadorEstante === 6) {
-        contadorEstante = 0;
-      }*/
+      /* if (contadorMesaCentral === 2) {
+         contadorMesaCentral = 0;
+         zC1 = zC1 + 4.5;
+         xC1 += 2;
+       }
+       if (contadorEstante === 6) {
+         contadorEstante = 0;
+       }*/
       if (mesalateralCP < 50 && !producto.prod_principal) {
         //colocar maximos de productos no principales en mesas laterales n
         htmlProd.push(
@@ -87,58 +92,58 @@ export const PuestoArtespueanal = (props) => {
       }
 
       //MESA CENTRAL + PRODUCTOS PRINCIPALES
-     /* if (mesacentral < 50 && producto.prod_principal) {
-        // maximo productos principales mesa central
-        htmlProd.push(
-          <Producto
-            key={producto.prod_id}
-            prod_nombre={producto.prod_nombre}
-            prod_descrip={producto.prod_descrip}
-            prod_scale={producto.prod_scale}
-            idProducto={producto.prod_id}
-            pArt_id={producto.pArt_id}
-            urlProducto={uploadUrl + producto.prod_modelo3D}
-            xM1={xC1}
-            yM1={yC1}
-            zM1={zC1}
-          />
-        );
-
-        if (ismesaC) {
-          zC1 -= 3;
-          ismesaC = !ismesaC;
-        } else {
-          zC1 -= 20;
-          ismesaC = !ismesaC;
-        }
-        contadorMesaCentral++;
-
-      //agregar variable del estante y coordenadas
-      } else if (mesaEstante < 10 && producto.prod_principal) {
-        htmlProd.push(
-          <Producto
-            key={producto.prod_id}
-            idProducto={producto.prod_id}
-            prod_nombre={producto.prod_nombre}
-            prod_descrip={producto.prod_descrip}
-            prod_scale={producto.prod_scale}
-            pArt_id={producto.pArt_id}
-            urlProducto={uploadUrl + producto.prod_modelo3D}
-            xM1={xE1}
-            yM1={yE1}
-            zM1={zE1}
-          />
-        );
-
-        if (ismesaE) {
-          xE1 -= 3;
-          ismesaE = !ismesaE;
-        } /*else{
-                    zE1-=150;
-                    ismesaC= !ismesaC
-                }
-        contadorEstante++;
-      }*/
+      /* if (mesacentral < 50 && producto.prod_principal) {
+         // maximo productos principales mesa central
+         htmlProd.push(
+           <Producto
+             key={producto.prod_id}
+             prod_nombre={producto.prod_nombre}
+             prod_descrip={producto.prod_descrip}
+             prod_scale={producto.prod_scale}
+             idProducto={producto.prod_id}
+             pArt_id={producto.pArt_id}
+             urlProducto={uploadUrl + producto.prod_modelo3D}
+             xM1={xC1}
+             yM1={yC1}
+             zM1={zC1}
+           />
+         );
+ 
+         if (ismesaC) {
+           zC1 -= 3;
+           ismesaC = !ismesaC;
+         } else {
+           zC1 -= 20;
+           ismesaC = !ismesaC;
+         }
+         contadorMesaCentral++;
+ 
+       //agregar variable del estante y coordenadas
+       } else if (mesaEstante < 10 && producto.prod_principal) {
+         htmlProd.push(
+           <Producto
+             key={producto.prod_id}
+             idProducto={producto.prod_id}
+             prod_nombre={producto.prod_nombre}
+             prod_descrip={producto.prod_descrip}
+             prod_scale={producto.prod_scale}
+             pArt_id={producto.pArt_id}
+             urlProducto={uploadUrl + producto.prod_modelo3D}
+             xM1={xE1}
+             yM1={yE1}
+             zM1={zE1}
+           />
+         );
+ 
+         if (ismesaE) {
+           xE1 -= 3;
+           ismesaE = !ismesaE;
+         } /*else{
+                     zE1-=150;
+                     ismesaC= !ismesaC
+                 }
+         contadorEstante++;
+       }*/
     });
     return htmlProd;
   }
@@ -146,6 +151,10 @@ export const PuestoArtespueanal = (props) => {
     <>
       <Scene>
         <a-assets>
+        <imd  alt=""
+            id="normal"
+            src={pisonormal}
+            crossOrigin=""></imd>
           <img
             alt=""
             id="sky"
@@ -158,12 +167,14 @@ export const PuestoArtespueanal = (props) => {
             src={process.env.PUBLIC_URL + "/img/2floor.jpg"}
             crossOrigin=""
           ></img>
-        </a-assets>
-        <a-assets>
-          <a-asset-item
+            <a-asset-item
             id="puestotex"
-            src={`${process.env.PUBLIC_URL} ${urlPuesto}`}
+            src= {modelo}
           ></a-asset-item>
+         <a-asset-item
+            id="arbol"
+            src= {arbol}
+          ></a-asset-item>   
         </a-assets>
         {productoHTML}
         <Entity
@@ -173,6 +184,16 @@ export const PuestoArtespueanal = (props) => {
           scale="0.8 0.8 0.8 "
           Rotation="0 -90 0 "
         ></Entity>
+           <Entity
+           gltf-model="#arbol"
+           position="-21 0.09 12"
+           scale="0.6 0.6 0.6 "
+           Rotation="0 -90 0 " 
+           
+           
+           
+           ></Entity>
+
         <Entity primitive="a-camera" position="1.5 7 24" rotation="-6.5 -2.8 -4.2">
           <Entity
             primitive="a-cursor"
@@ -183,11 +204,13 @@ export const PuestoArtespueanal = (props) => {
         </Entity>
         <Entity
           primitive="a-plane"
-          color="#a59182"
+          src={piso}
+          repeat="70 70"
+         normal-map= {pisonormal}
           position="0 0 0"
           rotation="-90 0 0"
-          height="1000"
-          width="1000"
+          height="500"
+          width="500"
         />
         <Entity primitive="a-sky" src="#sky" radius="600" />
 
