@@ -5,12 +5,13 @@ import Layout from "antd/lib/layout/layout";
 import LoginService from "../../services/LoginService";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import SessionService from "../../services/SessionService";
+import { useHistory } from "react-router-dom";
 
 
 const loginService = new LoginService();
 const sessionService = new SessionService();
 function LoginComponent(props) {
-
+  const history = new useHistory();
   console.log(props);
   const [loading, setLoading] = useState(false);
   const onFinish = (values) => {
@@ -21,8 +22,9 @@ function LoginComponent(props) {
           message.success("Sesión iniciada correctamente.");
           sessionService.setToken(response.token);
           props.setUser(sessionService.getUserData());
-          props.history.push("/inicio");
-          window.location.reload();
+          history.push("/inicio");
+          history.go(0);
+          //window.location.reload();
         } else {
           message.warning("Correo o contraseña no válido.");
           setLoading(false);
