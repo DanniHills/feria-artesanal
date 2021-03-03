@@ -157,7 +157,7 @@ exports.ubicacionTecnicas = async (req, res) => {
             });
         });
     });
-    res.send({status: 'Ok'});
+    res.send({status:'Ok'});
 }
 // Delete a Puesto Artesanal with the specified id in the request
 exports.delete = (req, res) => {
