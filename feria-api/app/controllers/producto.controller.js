@@ -92,6 +92,27 @@ exports.findAll = (req, res) => {
         });
 };
 
+exports.getProductosArtesano  = (req, res) => {
+    //const nombre = req.query.prod_nombre;
+    // var condition = nombre ? { nombre: { [Op.like]: `%${nombre}%` } } : null;
+    //Producto.findAll({ where: condition })
+    const art_id = req.params.art_id;
+
+    PuestoArtesanal.findAll({ 
+        where: { art_id: art_id },
+        include: [{ model: Producto }] 
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Ocurrio un error desconocido"
+            });
+        });
+};
+
+
 exports.detalleArtesanoMateriales = async (req, res) => {
     const prodId = req.params.prod_id;
 

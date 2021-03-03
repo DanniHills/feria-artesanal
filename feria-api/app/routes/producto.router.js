@@ -14,6 +14,7 @@ module.exports = app => {
 
     // Retrieve a single Tutorial with id
     router.get("/:prod_id", Producto.findOne);
+    router.get("/Artesano/:art_id", Producto.getProductosArtesano);
     // Update a Tutorial with id
     router.get("/detalleArtesanoMateriales/:prod_id", Producto.detalleArtesanoMateriales);
 
