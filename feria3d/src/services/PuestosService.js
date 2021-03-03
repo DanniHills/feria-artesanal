@@ -32,7 +32,12 @@ export default class PuestosService {
     buscarPuestos(){
         return fetch(`${PuestosService.rute}`, {method: 'GET', headers: { 'Content-Type': 'application/json' }})
         .then(response => response.json())
-    }   
+    } 
+    
+    ordenarPuestos(ubicaciones){
+        return fetch(`${PuestosService.rute}/ubicacion`, {method: 'POST', headers: { 'Content-Type': 'application/json' }, body: ubicaciones})
+        .then(response => response.json())
+    } 
 
 
 

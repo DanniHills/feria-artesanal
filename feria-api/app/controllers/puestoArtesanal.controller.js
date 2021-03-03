@@ -58,6 +58,23 @@ exports.findAll = (req, res) => {
             });
         });
 };
+
+exports.getPuestosArtesanoId = (req, res) => {
+    //const nombre = req.query.pArt_nombre;
+    // var condition = nombre ? { nombre: { [Op.like]: `%${nombre}%` } } : null;
+    //PuestoArtesanal.findAll({ where: condition })
+    const art_id = req.params.art_id;
+    PuestoArtesanal.findAll({ where: {art_id: art_id } })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Ocurrio un error desconocido"
+            });
+        });
+};
+
 // agregar where con id para puesto de manera individual
 exports.findAllWithProd = (req, res) => {
     //const nombre = req.query.pArt_nombre;
@@ -124,6 +141,24 @@ exports.update = (req, res) => {
         });
 };
 
+exports.ubicacionTecnicas = async (req, res) => {
+    console.log("\n\n\n");
+    let ubicaciones = req.body;
+    PuestoArtesanal.findAll().then(puestos => {
+        ubicaciones.forEach((ubicacion, index) => {
+            puestos.forEach(puesto => {
+            puesto = puesto.dataValues;
+                if(puesto.tec_id === ubicacion){
+                    puesto.pArt_ubicacion = index + 1;
+                    PuestoArtesanal.update(puesto, {
+                        where: { pArt_id: puesto.pArt_id }
+                    });
+                }
+            });
+        });
+    });
+    res.send({status: 'Ok'});
+}
 // Delete a Puesto Artesanal with the specified id in the request
 exports.delete = (req, res) => {
     const pArtId = req.params.pArt_id;

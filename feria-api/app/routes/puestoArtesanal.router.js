@@ -9,7 +9,9 @@ module.exports = app => {
     // Retrieve all Puesto Artesanal
     router.get("/getProductos/", PuestoArtesanal.findAll);
     router.get("/getProductos/:pArt_id", PuestoArtesanal.findAllWithProd);
+    router.post("/ubicacion", PuestoArtesanal.ubicacionTecnicas);
 
+    router.get("/Artesano/:art_id", PuestoArtesanal.getPuestosArtesanoId);
     // Retrieve all published Puesto Artesanal
     // router.get("/published", PuestoArtesanal.findAllPublished);
 
