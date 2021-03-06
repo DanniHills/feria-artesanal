@@ -94,11 +94,6 @@ function UbicacionPuestosComponent() {
     });
     const tecId = JSON.stringify(tecnicasID);
     puestosService.ordenarPuestos(tecId);
-    console.log('tecid', tecId);
-    //llamar servicio ordenarubicacion  mandar arreglo
-    // json.Stringify front
-    // json.parser
-    //que se hace en el backend
   };
 
   return (
