@@ -48,7 +48,7 @@ exports.findAll = (req, res) => {
     // var condition = nombre ? { nombre: { [Op.like]: `%${nombre}%` } } : null;
     //PuestoArtesanal.findAll({ where: condition })
 
-    PuestoArtesanal.findAll({include: [{model :Productos}]})
+    PuestoArtesanal.findAll({include: [{model :Productos}],order:[['pArt_ubicacion', 'ASC']]})
         .then(data => {
             res.send(data);
         })
@@ -159,6 +159,7 @@ exports.ubicacionTecnicas = async (req, res) => {
     });
     res.send({status:'Ok'});
 }
+//puestos ordenados por ubicacion
 exports.ordenUbicacion = (req,res)=>{
     PuestoArtesanal.findAll({ order:[['pArt_ubicacion', 'ASC']] } )
     .then(data => {
