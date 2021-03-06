@@ -159,6 +159,17 @@ exports.ubicacionTecnicas = async (req, res) => {
     });
     res.send({status:'Ok'});
 }
+exports.ordenUbicacion = (req,res)=>{
+    PuestoArtesanal.findAll({ order:[['pArt_ubicacion', 'ASC']] } )
+    .then(data => {
+        res.send(data);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: err.message || "Ocurrio un error desconocido"
+        });
+    });
+}
 // Delete a Puesto Artesanal with the specified id in the request
 exports.delete = (req, res) => {
     const pArtId = req.params.pArt_id;
