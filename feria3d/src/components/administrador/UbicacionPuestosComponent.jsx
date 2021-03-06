@@ -26,30 +26,75 @@ const SortableList = SortableContainer(({ items }) => {
 function UbicacionPuestosComponent() {
   const [tecnicas, setTecnicas] = useState([]);
   const [tecnicasOld, setTecnicasOld] = useState([]);
+  const [ubicacion, setUbicacion] = useState([]);
+
   useEffect(() => {
+    PuestosService.obtenerPuestos().then((puestoUbicacion) => {
+      let tecnicafilter =[];
+      puestoUbicacion.forEach((puest) => {
+        tecnicafilter.push(puest.tec_id)   
+        const unicos = tecnicafilter.filter((valor, indice) => {
+         return tecnicafilter.indexOf(valor) === indice;
+        } 
+      );
+        tecnicasService.buscarTecnicas().then((tecActual) => {
+          let tec = [];
+          let teca = [];
+          let i=0;
+          setTecnicasOld(tecActual);
+          unicos.forEach((Actual) => {
+            tecActual.forEach((tecnica) => {
+              if (Actual == tecnica.tec_id) {
+                tec.push(tecnica.tec_nombre);
+                i=i+1;
+                teca.push('Zona'+ ' ' +i);
+              }
+            })
+          })
+          setUbicacion(teca);
+          setTecnicas(tec);
+        });
+      })
+    });
+  }, []);
+
+  /*useEffect(() => {
     tecnicasService.buscarTecnicas().then((response) => {
       let tec = [];
+     let ubicacionActual=[];
       setTecnicasOld(response);
       response.forEach((tecnica) => {
         tec.push(tecnica.tec_nombre);
+        PuestosService.obtenerPuestos().then((puestoUbicacion) => {
+          puestoUbicacion.forEach((puesto)=>{
+            /*console.log('puesto',puesto.pArt_ubicacion);
+            console.log('tec',tecnica.tec_nombre);
+            if(tecnica.tec_id === puesto.pArt_ubicacion)
+            ubicacionActual.push(tecnica.tec_nombre)
+            console.log([ubicacionActual]);
+          })
+       
+        });
       });
+      
       setTecnicas(tec);
     });
-  }, []);
+  }, []);*/
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
     const newtecnicas = arrayMove(tecnicas, oldIndex, newIndex);
     setTecnicas(newtecnicas);
-    let tecnicasID=[];
-    newtecnicas.forEach(tecNew=>{
+    let tecnicasID = [];
+    newtecnicas.forEach(tecNew => {
       tecnicasOld.forEach(tecOld => {
-        if(tecOld.tec_nombre=== tecNew){
+        if (tecOld.tec_nombre === tecNew) {
           tecnicasID.push(tecOld.tec_id);
         }
       });
     });
     const tecId = JSON.stringify(tecnicasID);
     puestosService.ordenarPuestos(tecId);
+    console.log('tecid', tecId);
     //llamar servicio ordenarubicacion  mandar arreglo
     // json.Stringify front
     // json.parser
@@ -63,12 +108,8 @@ function UbicacionPuestosComponent() {
         <Divider orientation="left">Configuración </Divider>
 
         <Col style={{ marginTop: 30 }} span={6} offset={6}>
-          <Card >Zona A </Card>
-          <Card >Zona B </Card>
-          <Card >Zona C </Card>
-          <Card >Zona D </Card>
-          <Card >Zona E </Card>
-          <Card >Zona F </Card>
+          {ubicacion.length>0 &&
+          <SortableList items={ubicacion}></SortableList>}
         </Col>
         <Col style={{ marginTop: 30 }} span={6}>
           {tecnicas.length > 0 &&
@@ -76,9 +117,7 @@ function UbicacionPuestosComponent() {
           }
         </Col>
       </Row>
-
     </>
   );
 }
 export default UbicacionPuestosComponent;
-// LLAMAR TRABAJADORA SOCIAL
