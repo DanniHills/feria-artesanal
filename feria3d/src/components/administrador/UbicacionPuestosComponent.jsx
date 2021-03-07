@@ -44,7 +44,7 @@ function UbicacionPuestosComponent() {
           setTecnicasOld(tecActual);
           unicos.forEach((Actual) => {
             tecActual.forEach((tecnica) => {
-              if (Actual == tecnica.tec_id) {
+              if (Actual === tecnica.tec_id) {
                 tec.push(tecnica.tec_nombre);
                 i=i+1;
                 teca.push('Zona'+ ' ' +i);
