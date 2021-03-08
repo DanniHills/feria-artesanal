@@ -17,9 +17,9 @@ module.exports = app => {
     router.get("/Artesano/:art_id", Producto.getProductosArtesano);
     // Update a Tutorial with id
     router.get("/detalleArtesanoMateriales/:prod_id", Producto.detalleArtesanoMateriales);
-
+    router.get("/orden/", Producto.findAll);
     router.put("/:prod_id", Producto.update);
-
+    router.post("/ubicacion", Producto.ubicacionProductos);
     // Delete a Tutorial with id
     router.delete("/:prod_id", Producto.delete);
 

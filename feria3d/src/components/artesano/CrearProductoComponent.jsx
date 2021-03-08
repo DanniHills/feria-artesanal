@@ -59,6 +59,7 @@ function CrearProductoComponent() {
     formulario.append("pArt_id", producto.pArt_id);
     formulario.append("prod_descrip", producto.prod_descrip);
     formulario.append("prod_principal", principal);
+    formulario.append("prod_ubicacion", producto.prod_ubicacion);
     formulario.append("prod_scale", producto.prod_scale);
     formulario.append("prod_imagen", archivoImagen[0]);
     formulario.append("prod_modelo", archivoModelo[0]);

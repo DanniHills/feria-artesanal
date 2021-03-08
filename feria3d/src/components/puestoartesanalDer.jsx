@@ -3,10 +3,10 @@ import 'aframe';
 import { Entity } from 'aframe-react';
 import { Producto } from './producto';
 import { useHistory } from 'react-router-dom';
-
 export const PuestoArtesanal2 = (props) => {
     const uploadUrl = 'http://localhost/';
     const urlPuestoD = "../img/conmesa.glb";
+    const urlshop = "../img/shop.jpg";
     const XEntrar=(`${props.xEntrar}`);
     const YEntrar=(`${props.yEntrar}`);
     const ZEntrar=(`${props.zEntrar}`);
@@ -18,8 +18,7 @@ export const PuestoArtesanal2 = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.productos]);
 
-    function generarProductos() {
-        console.log(props);
+    function generarProductos(){
         /*let xM1 = props.xPuesto - 11; //24.2
         let yM1 = props.yPuesto - 0.5; //0.5
         let zM1 = props.zPuesto - 30; //83.4;
@@ -29,8 +28,8 @@ export const PuestoArtesanal2 = (props) => {
         */
         let htmlProd = [];
         let mesacentral = 0;// contador producto principales, cantidad maxima en la mesa central
-        let xC1 = props.xPuesto + 5;
-        let yC1 = props.yPuesto - 0.95;
+        let xC1 = props.xPuesto -10;
+        let yC1 = props.yPuesto +0.4;
         let zC1 = props.zPuesto - 4;
 
         let ismesaC = true; // mesa central producto principal al lado 
@@ -43,10 +42,10 @@ export const PuestoArtesanal2 = (props) => {
                 zM1 = props.zPuesto + 10;
                 xM1 += 2;
             }*/
-            if (contadorMesaCentral === 2) {
+            if (contadorMesaCentral === 1) {
                 contadorMesaCentral = 0;
-                zC1 = props.zPuesto;
-                xC1 += 2;
+
+                zC1 += 2;
             }
             /*if (mesalateralCP < 20 && !producto.prod_principal) { //colocar maximos de productos no principales en mesas laterales n
                 htmlProd.push(<Producto
@@ -83,10 +82,11 @@ export const PuestoArtesanal2 = (props) => {
                     urlProducto={uploadUrl + producto.prod_modelo3D} xM1={xC1} yM1={yC1} zM1={zC1} />)
 
                 if (ismesaC) {
-                    zC1 -= 3;
+                   
+                    xC1-=1;
                     ismesaC = !ismesaC
                 } else {
-                    zC1 += 20;
+                    zC1 += 2;
                     ismesaC = !ismesaC
                 }
                 contadorMesaCentral++;
@@ -94,7 +94,7 @@ export const PuestoArtesanal2 = (props) => {
            
         });
         return htmlProd;
-    }
+    };
     const history = useHistory();
     const handleClick = useCallback(() => history.push('/puesto/' + props.pArt_id), [history]);
     return (
@@ -108,12 +108,15 @@ export const PuestoArtesanal2 = (props) => {
                 gltf-model="#puestoDer"
                 position={`${props.xPuesto} ${props.yPuesto} ${props.zPuesto}`}
                 scale="0.8 0.8 0.8 "
-                Rotation="0 180 0 " >
+                Rotation="0 180 0 " 
+                
+           >
             </Entity>
             <Entity primitive="a-plane"
-                color="red" 
+                color="#f0b7b7"
+                src={`${process.env.PUBLIC_URL} ${urlshop}`}
                 position={`${XEntrar} ${YEntrar} ${ZEntrar}`} 
-                rotation="-48.92658499960638 -90.00021045914971 90.00021045914971" 
+                rotation="-20 -93.00021045914971 0" 
                 height="10" width="10" material="" geometry="height: 5" scale="0.5 1 0.5"
                 events={{
                     click: handleClick.bind(this)
@@ -122,4 +125,3 @@ export const PuestoArtesanal2 = (props) => {
         </>
     );
 }
-//editar pos plano lado derecho 

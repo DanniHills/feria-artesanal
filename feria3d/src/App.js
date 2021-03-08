@@ -24,7 +24,7 @@ import UbicacionPuestosComponent from './components/administrador/UbicacionPuest
 import UbicacionProductosComponent from './components/artesano/UbicacionProductosComponent';
 import VerProductoComponent from './components/artesano/VerProductoComponent';
 import PuestoIndividual from './components/puestoIndividual';
-
+import SortableComponent from './components/artesano/test'
 const sessionService = new SessionService();
 
 function App() {
@@ -61,7 +61,7 @@ function App() {
             <Route path="/detalle/:prod_id" component={DetalleProd} />,
             <Route path="/artesano/verProducto/:prod_id" component={VerProductoComponent}/>,
             <Route path="/puesto/:pArt_id"  component={PuestoIndividual}/>,
-
+            <Route path= "/test"  exact component={SortableComponent}/>,
     ];
     
     let sider = null;

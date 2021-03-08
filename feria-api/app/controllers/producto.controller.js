@@ -24,6 +24,7 @@ exports.create = (req, res) => {
             const archivoModelo = req.files.prod_modelo;
             // Create a Producto
             const producto = {
+                prod_id: req.body.prod_id,
                 pArt_id: req.body.pArt_id,
                 prod_nombre: req.body.prod_nombre,
                 prod_descrip: req.body.prod_descrip,
@@ -31,7 +32,7 @@ exports.create = (req, res) => {
                 prod_modelo3D: '',
                 prod_imagen: '',
                 prod_std: '1',
-                prod_ubicacion: req.body.prod_ubicacion,
+                prod_ubicacion: req.body.prod_id,
                 prod_scale: req.body.prod_scale,
             };
             var materiales = req.body.mat_id;
@@ -81,7 +82,7 @@ exports.findAll = (req, res) => {
     // var condition = nombre ? { nombre: { [Op.like]: `%${nombre}%` } } : null;
     //Producto.findAll({ where: condition })
 
-    Producto.findAll()
+    Producto.findAll({order:[['prod_ubicacion', 'ASC']]})
         .then(data => {
             res.send(data);
         })
@@ -91,7 +92,24 @@ exports.findAll = (req, res) => {
             });
         });
 };
-
+exports.ubicacionProductos = async (req, res) => {
+    console.log("\n\n\n");
+    let ubicaciones = req.body;
+    console.log(ubicaciones);
+    Producto.findAll().then(productos => {
+        ubicaciones.forEach((ubicacion, index) => {
+            productos.forEach(producto => {
+            producto = producto.dataValues;
+                if(producto.prod_ubicacion === ubicacion){
+                    producto.prod_ubicacion = index + 1;
+                    Producto.update(producto, {
+                        where: { prod_id: producto.prod_id }
+                    });
+                }
+            });
+        });
+    });
+};
 exports.getProductosArtesano  = (req, res) => {
     //const nombre = req.query.prod_nombre;
     // var condition = nombre ? { nombre: { [Op.like]: `%${nombre}%` } } : null;

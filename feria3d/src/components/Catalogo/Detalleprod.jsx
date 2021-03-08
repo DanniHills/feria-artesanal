@@ -10,6 +10,7 @@ function DetalleProd() {
   const prod_id = useParams().prod_id;
   const uploadsUrl = 'http://localhost/';
   const [producto, setProducto] = useState(null);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const artesanoService = new ArtesanoService();
   const [informacion, setInformacion] = useState(null);
 
@@ -22,7 +23,7 @@ function DetalleProd() {
       .catch((e) => {
         console.log(e);
       });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [prod_id]); 
 
   useEffect(() => {
     artesanoService.informacionProductoArtesano(prod_id).then((res) => {
@@ -31,7 +32,7 @@ function DetalleProd() {
     }).catch((e) => {
       console.log(e);
     });
-  }, []);
+  }, [artesanoService, prod_id]);
 
   return (
 

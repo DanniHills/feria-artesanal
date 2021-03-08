@@ -5,13 +5,12 @@ import { Entity } from 'aframe-react';
 import { Modal, Descriptions } from 'antd';
 import '@google/model-viewer';
 import ArtesanoService from '../services/artesanoService';
-import { useParams } from 'react-router-dom';
 export const Producto = (props) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     //const uploadsUrl = 'http://localhost/';
     const [informacion, setInformacion]=useState([]);
     const artesanoService= new ArtesanoService();
-    const []= useState([]);
+    
     const showModal = () => {
       setIsModalVisible(true);
     };
@@ -29,7 +28,7 @@ export const Producto = (props) => {
       console.log('Clicked!');
       showModal();
     } 
-console.log('id: '+props.prod_id);
+console.log('id: ',props.prod_id);
     useEffect(()=>{
       artesanoService.informacionProductoArtesano(props.prod_id).then((res) => {
         console.log(res);
@@ -37,7 +36,7 @@ console.log('id: '+props.prod_id);
       }).catch((e) => {
         console.log(e);
       });
-    }, [props.productos]);
+    }, []);
 
     return (
         <>  
@@ -65,7 +64,7 @@ console.log('id: '+props.prod_id);
                     camera-controls 
                     auto-rotate 
                     src={props.urlProducto} 
-                    alt="A 3D model of a shishkebab"
+                    alt=" "
                 />
                  <Descriptions >
                     <Descriptions.Item label={'Información de Contacto'} span={6}> </Descriptions.Item>

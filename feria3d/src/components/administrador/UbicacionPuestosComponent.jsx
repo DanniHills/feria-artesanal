@@ -47,7 +47,7 @@ function UbicacionPuestosComponent() {
               if (Actual === tecnica.tec_id) {
                 tec.push(tecnica.tec_nombre);
                 i=i+1;
-                teca.push('Zona'+ ' ' +i);
+                teca.push(`Zona ${i}`);
               }
             })
           })
@@ -58,28 +58,6 @@ function UbicacionPuestosComponent() {
     });
   }, []);
 
-  /*useEffect(() => {
-    tecnicasService.buscarTecnicas().then((response) => {
-      let tec = [];
-     let ubicacionActual=[];
-      setTecnicasOld(response);
-      response.forEach((tecnica) => {
-        tec.push(tecnica.tec_nombre);
-        PuestosService.obtenerPuestos().then((puestoUbicacion) => {
-          puestoUbicacion.forEach((puesto)=>{
-            /*console.log('puesto',puesto.pArt_ubicacion);
-            console.log('tec',tecnica.tec_nombre);
-            if(tecnica.tec_id === puesto.pArt_ubicacion)
-            ubicacionActual.push(tecnica.tec_nombre)
-            console.log([ubicacionActual]);
-          })
-       
-        });
-      });
-      
-      setTecnicas(tec);
-    });
-  }, []);*/
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
     const newtecnicas = arrayMove(tecnicas, oldIndex, newIndex);

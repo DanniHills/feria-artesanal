@@ -33,4 +33,8 @@ export default class ArtesanoService{
         return fetch('http://localhost:8080/api/Producto/detalleArtesanoMateriales/'+ prod_id, {method: 'GET', headers: { 'Content-Type': 'application/json' }})
         .then(response => response.json())
     }
+    ordenarProductos(ubicaciones){
+        return fetch(`http://localhost:8080/api/Producto/ubicacion`, {method: 'POST', headers: { 'Content-Type': 'application/json' }, body: ubicaciones})
+        .then(response => response.json())
+    } 
 }

@@ -17,6 +17,7 @@ function HomeComponent() {
       .catch((e) => {
         console.log(e);
       });
+  
   }, []);
   function generarPuestos(puestos) {
     let coordX = -23; //-1.41;
@@ -27,14 +28,14 @@ function HomeComponent() {
     let coordyDer = 6.5;
     let coordzDer = 86;
     let htmlP = [];
-    let xEntrarI=-9.6;
-    let yEntrarI=2.4;
-    let zEntrarI=79;
-    let xEntrarD=21;
-    let yEntrarD=2.4;
-    let zEntrarD=75.86;
-    console.log('der:'+coordxDer, coordyDer, coordzDer);
-    console.log('izq:'+coordX, coordY, coordZ);
+    let xEntrarI = -11.3;
+    let yEntrarI = 2.4; 
+    let zEntrarI = 77.56;
+    let xEntrarD = 23;
+    let yEntrarD = 2.4;
+    let zEntrarD = 81;
+    console.log('der:' + coordxDer, coordyDer, coordzDer);
+    console.log('izq:' + coordX, coordY, coordZ);
     puestos.forEach((puesto) => {
       if (!esRotado) {
         htmlP.push(
@@ -52,7 +53,7 @@ function HomeComponent() {
           />
         );
         coordZ -= 35;
-        zEntrarI-=35;
+        zEntrarI -= 35;
         esRotado = !esRotado;
       } else {
         htmlP.push(
@@ -70,18 +71,12 @@ function HomeComponent() {
           />
         );
         coordzDer -= 35;
-        zEntrarD -= 35; 
+        zEntrarD -= 35;
         esRotado = !esRotado;
       }
     });
     return htmlP;
-  }
-  /*const handleClick = () => {
-    console.log("Clicked!");
   };
-  const handleCollide = () => {
-    console.log("Collided!");
-  };*/
   return (
     <>
       <Scene>
@@ -91,7 +86,7 @@ function HomeComponent() {
             id="sky"
             src={process.env.PUBLIC_URL + "/img/cielovalpo.jpg"}
             crossOrigin=""
-            repeat= "4 4"
+            repeat="4 4"
           ></img>
           <img
             alt=""
@@ -118,10 +113,11 @@ function HomeComponent() {
           intensity="0.8"
         />
 
-        <Entity primitive="a-camera" position="6.9 6.9 122">
+        <Entity primitive="a-camera" position="6.9 6.9 122"   camera="" rotation="" look-controls="" wasd-controls="" data-aframe-inspector-original-camera="">         
           <Entity
+          raycaster=""
             primitive="a-cursor"
-            cursor="downEvents:  ;  upEvents:  ;"
+            cursor="downEvents:  ;  upEvents:  ;rayOrigin:  mouse"
             material={{ color: "black", shader: "flat", opacity: 4 }}
             geometry={{ radiusInner: 0.005, radiusOuter: 0.007 }}
           />

@@ -1,3 +1,4 @@
+const { productos } = require("../models");
 const db = require("../models");
 const PuestoArtesanal = db.puestosArtesanales;
 const Op = db.Sequelize.Op;
@@ -48,7 +49,7 @@ exports.findAll = (req, res) => {
     // var condition = nombre ? { nombre: { [Op.like]: `%${nombre}%` } } : null;
     //PuestoArtesanal.findAll({ where: condition })
 
-    PuestoArtesanal.findAll({include: [{model :Productos}],order:[['pArt_ubicacion', 'ASC']]})
+    PuestoArtesanal.findAll({include: [{model :Productos }],order:[['pArt_ubicacion', 'ASC'],[Productos,'prod_ubicacion','ASC']]})
         .then(data => {
             res.send(data);
         })
@@ -81,7 +82,7 @@ exports.findAllWithProd = (req, res) => {
     // var condition = nombre ? { nombre: { [Op.like]: `%${nombre}%` } } : null;
     //PuestoArtesanal.findAll({ where: condition })
     const pArtId = req.params.pArt_id;
-    PuestoArtesanal.findOne({  where: { pArt_id: pArtId }, include: [{model :Productos}]})
+    PuestoArtesanal.findOne({  where: { pArt_id: pArtId }, include: [{model :Productos  }],order:[[Productos,'prod_ubicacion','ASC']]})
         .then(data => {
             res.send(data);
         })

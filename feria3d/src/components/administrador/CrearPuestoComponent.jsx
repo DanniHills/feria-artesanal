@@ -27,7 +27,7 @@ function CrearPuestoComponent() {
     formulario.append("pArt_descrip", puesto.pArt_descrip);
     formulario.append("pArt_std", puesto.pArt_std);
     //formulario.append("pArt_logo", archivoImagen[0]);
-    formulario.append("pArt_ubicación",puesto.pArt_id );
+    formulario.append("pArt_ubicación",puesto.pArt_ubicación );
 
     console.log("Received values of form: ", formulario);
     administradorService
