@@ -12,7 +12,10 @@ export const PuestoArtesanal = (props) => {
     const XEntrar = (`${props.xEntrar}`);
     const YEntrar = (`${props.yEntrar}`);
     const ZEntrar = (`${props.zEntrar}`);
-    console.log("izq" + urlPuesto);
+    const XlOGO = (`${props.xEntrar+1.918}`);
+    const YlOGO = (`${props.yEntrar-4.813}`);
+    const ZlOGO = (`${props.zEntrar+9.1}`);
+    console.log("LOGO", XlOGO, YlOGO,ZlOGO);
     const [productoHTML, setProductoHTML] = useState([]);
     useEffect(() => {
         if (props.productos !== undefined)
@@ -20,7 +23,7 @@ export const PuestoArtesanal = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.productos]);
 
-    function generarProductos() {
+    const generarProductos = useCallback(() => {
         /*let xM1 = props.xPuesto - 10;
        let yM1 = props.yPuesto - 0.5;
        let zM1 = props.zPuesto + 6.5;
@@ -73,7 +76,7 @@ export const PuestoArtesanal = (props) => {
             }
         });
         return htmlProd;
-    };
+    }, [props.productos, props.xPuesto, props.yPuesto, props.zPuesto]);
 
     const history = useHistory();
     const handleClick = useCallback(() => history.push('/puesto/' + props.pArt_id), [history]);
@@ -81,6 +84,12 @@ export const PuestoArtesanal = (props) => {
         <>
             <a-assets>
                 <a-asset-item id="puestoIzq" src={`${process.env.PUBLIC_URL} ${urlPuesto}`}></a-asset-item>
+                <img
+                    alt=""
+                    id="logo"
+                    src={process.env.PUBLIC_URL + "/img/logo/flooop.png"}
+                    crossOrigin=""
+                ></img>
             </a-assets>
 
             {productoHTML}
@@ -92,11 +101,22 @@ export const PuestoArtesanal = (props) => {
                 Rotation="0 0 0 "
                 light="intensity:  0.2;  type:  ambient;  angle:  90;  color:  #c6b9b9" >
             </Entity>
+            <Entity
+                src='#logo'
+                color="pink"
+                primitive="a-plane"
+                position= {`${XlOGO} ${YlOGO} ${ZlOGO}`}
+                rotation="0 90 -180"
+                scale="-1.58 -0.35 1"
+                height="10"
+                width="10"
+
+            />
             <Entity primitive="a-plane"
                 src={`${process.env.PUBLIC_URL} ${urlshop}`}
                 color="#f0b7b7"
                 position={`${XEntrar} ${YEntrar} ${ZEntrar}`}
-                rotation="-20 93.00021045914971 0"
+                rotation="-20 63.833 0"
                 height="10" width="10" material="" geometry="height: 5" scale="0.5 1 0.5"
                 events={{
                     click: handleClick.bind(this)
@@ -105,6 +125,3 @@ export const PuestoArtesanal = (props) => {
         </>
     );
 }
-
-
-//editar pos de plano para el  click

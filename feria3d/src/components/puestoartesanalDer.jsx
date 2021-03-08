@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import 'aframe';
 import { Entity } from 'aframe-react';
 import { Producto } from './producto';
@@ -7,10 +7,12 @@ export const PuestoArtesanal2 = (props) => {
     const uploadUrl = 'http://localhost/';
     const urlPuestoD = "../img/conmesa.glb";
     const urlshop = "../img/shop.jpg";
-    const XEntrar=(`${props.xEntrar}`);
-    const YEntrar=(`${props.yEntrar}`);
-    const ZEntrar=(`${props.zEntrar}`);
-
+    const XEntrar = (`${props.xEntrar+3}`);
+    const YEntrar = (`${props.yEntrar}`);
+    const ZEntrar = (`${props.zEntrar-1}`);
+    const XlOGO = (`${props.xEntrar+1}`);
+    const YlOGO = (`${props.yEntrar-4.813}`);
+    const ZlOGO = (`${props.zEntrar+8.638}`);
     const [productoHTML, setProductoHTML] = useState([]);
     useEffect(() => {
         if (props.productos !== undefined)
@@ -18,7 +20,7 @@ export const PuestoArtesanal2 = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.productos]);
 
-    function generarProductos(){
+    const generarProductos = useCallback(() => {
         /*let xM1 = props.xPuesto - 11; //24.2
         let yM1 = props.yPuesto - 0.5; //0.5
         let zM1 = props.zPuesto - 30; //83.4;
@@ -28,8 +30,8 @@ export const PuestoArtesanal2 = (props) => {
         */
         let htmlProd = [];
         let mesacentral = 0;// contador producto principales, cantidad maxima en la mesa central
-        let xC1 = props.xPuesto -10;
-        let yC1 = props.yPuesto +0.4;
+        let xC1 = props.xPuesto - 10;
+        let yC1 = props.yPuesto + 0.4;
         let zC1 = props.zPuesto - 4;
 
         let ismesaC = true; // mesa central producto principal al lado 
@@ -37,11 +39,11 @@ export const PuestoArtesanal2 = (props) => {
         //let contadorEstante = 0;
 
         props.productos.forEach(producto => {
-           /* if (contadorMesalateral === 4) {
-                contadorMesalateral = 0;
-                zM1 = props.zPuesto + 10;
-                xM1 += 2;
-            }*/
+            /* if (contadorMesalateral === 4) {
+                 contadorMesalateral = 0;
+                 zM1 = props.zPuesto + 10;
+                 xM1 += 2;
+             }*/
             if (contadorMesaCentral === 1) {
                 contadorMesaCentral = 0;
 
@@ -82,8 +84,8 @@ export const PuestoArtesanal2 = (props) => {
                     urlProducto={uploadUrl + producto.prod_modelo3D} xM1={xC1} yM1={yC1} zM1={zC1} />)
 
                 if (ismesaC) {
-                   
-                    xC1-=1;
+
+                    xC1 -= 1;
                     ismesaC = !ismesaC
                 } else {
                     zC1 += 2;
@@ -91,16 +93,22 @@ export const PuestoArtesanal2 = (props) => {
                 }
                 contadorMesaCentral++;
             }
-           
+
         });
         return htmlProd;
-    };
+    }, [props.productos, props.xPuesto, props.yPuesto, props.zPuesto]);
     const history = useHistory();
     const handleClick = useCallback(() => history.push('/puesto/' + props.pArt_id), [history]);
     return (
         <>
             <a-assets>
                 <a-asset-item id="puestoDer" src={`${process.env.PUBLIC_URL} ${urlPuestoD}`}></a-asset-item>
+                <img
+                    alt=""
+                    id="logo"
+                    src={process.env.PUBLIC_URL + "/img/logo/flooop.png"}
+                    crossOrigin=""
+                ></img>
             </a-assets>
             {productoHTML}
             <Entity
@@ -108,19 +116,30 @@ export const PuestoArtesanal2 = (props) => {
                 gltf-model="#puestoDer"
                 position={`${props.xPuesto} ${props.yPuesto} ${props.zPuesto}`}
                 scale="0.8 0.8 0.8 "
-                Rotation="0 180 0 " 
-                
-           >
+                Rotation="0 180 0 "
+
+            >
             </Entity>
+            <Entity
+                src='#logo'
+                color="pink"
+                primitive="a-plane"
+                position= {`${XlOGO} ${YlOGO} ${ZlOGO}`}
+                rotation=" 0 -90 -180"
+                scale="-1.58 -0.35 1"
+                height="10"
+                width="10"
+
+            />
             <Entity primitive="a-plane"
                 color="#f0b7b7"
                 src={`${process.env.PUBLIC_URL} ${urlshop}`}
-                position={`${XEntrar} ${YEntrar} ${ZEntrar}`} 
-                rotation="-20 -93.00021045914971 0" 
+                position={`${XEntrar} ${YEntrar} ${ZEntrar}`}
+                rotation="-20 -58.275 0"
                 height="10" width="10" material="" geometry="height: 5" scale="0.5 1 0.5"
                 events={{
                     click: handleClick.bind(this)
-                  }}>
+                }}>
             </Entity>
         </>
     );

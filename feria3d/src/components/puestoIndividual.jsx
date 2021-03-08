@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "aframe";
 import { Entity, Scene } from "aframe-react";
 import { Producto } from "./producto";
@@ -24,7 +24,7 @@ export const PuestoArtespueanal = (props) => {
       console.log(e);
     });
   }, [props.productos]);
-  function generarProductos() {
+  const generarProductos = useCallback(() => {
     let xM1 = 0;
     let yM1 = 6.048;
     let zM1 = 0;
@@ -36,13 +36,13 @@ export const PuestoArtespueanal = (props) => {
     let ismesa = true;
     let mesacentral = 0; // contador producto principales, cantidad maxima en la mesa central
     let xC1 = 3;
-    let yC1 =4.7; //OK
+    let yC1 = 4.7; //OK
     let zC1 = 5;
-    console.log( xC1, yC1, zC1);
+    console.log(xC1, yC1, zC1);
 
     let ismesaC = true; // mesa central producto principal al lado
     let contadorMesaCentral = 0;
- 
+
 
     props.productos.forEach((producto) => {
       if (contadorMesalateral === 4) {
@@ -50,12 +50,12 @@ export const PuestoArtespueanal = (props) => {
         xM1 = xM1 + 15;
         zM1 += 3;
       }
-       if (contadorMesaCentral === 2) {
-         contadorMesaCentral = 0;
-         xC1 = xC1 - 4.5;
-         zC1 = 2;
-       }
-     
+      if (contadorMesaCentral === 2) {
+        contadorMesaCentral = 0;
+        xC1 = xC1 - 4.5;
+        zC1 = 2;
+      }
+
       if (mesalateralCP < 20 && !producto.prod_principal) {
         //colocar maximos de productos no principales en mesas laterales n
         htmlProd.push(
@@ -84,35 +84,35 @@ export const PuestoArtespueanal = (props) => {
         contadorMesalateral++;
       }
 
-    if (mesacentral < 9 && producto.prod_principal) {
-         // maximo productos principales mesa central
-         htmlProd.push(
-           <Producto
-             key={producto.prod_id}
-             prod_nombre={producto.prod_nombre}
-             prod_descrip={producto.prod_descrip}
-             prod_scale={producto.prod_scale}
-             idProducto={producto.prod_id}
-             pArt_id={producto.pArt_id}
-             urlProducto={uploadUrl + producto.prod_modelo3D}
-             xM1={xC1}
-             yM1={yC1}
-             zM1={zC1}
-           />
-         );
- 
-         if (ismesaC) {
-           zC1 -= 3;
-           ismesaC = !ismesaC;
-         } else {
-           zC1 -= 20;
-           ismesaC = !ismesaC;
-         }
-         contadorMesaCentral++;
-       } 
+      if (mesacentral < 9 && producto.prod_principal) {
+        // maximo productos principales mesa central
+        htmlProd.push(
+          <Producto
+            key={producto.prod_id}
+            prod_nombre={producto.prod_nombre}
+            prod_descrip={producto.prod_descrip}
+            prod_scale={producto.prod_scale}
+            idProducto={producto.prod_id}
+            pArt_id={producto.pArt_id}
+            urlProducto={uploadUrl + producto.prod_modelo3D}
+            xM1={xC1}
+            yM1={yC1}
+            zM1={zC1}
+          />
+        );
+
+        if (ismesaC) {
+          zC1 -= 3;
+          ismesaC = !ismesaC;
+        } else {
+          zC1 -= 20;
+          ismesaC = !ismesaC;
+        }
+        contadorMesaCentral++;
+      }
     });
     return htmlProd;
-  };
+  }, []);
   return (
     <>
       <Scene>
@@ -133,7 +133,7 @@ export const PuestoArtespueanal = (props) => {
             src={process.env.PUBLIC_URL + "/img/2floor.jpg"}
             crossOrigin=""
           ></img>
-               <img
+          <img
             alt=""
             id="logo"
             src={process.env.PUBLIC_URL + "/img/logo/flooop.png"}
@@ -143,7 +143,7 @@ export const PuestoArtespueanal = (props) => {
             id="puestotex"
             src={modelo}
           ></a-asset-item>
-          
+
         </a-assets>
         {productoHTML}
         <Entity
@@ -155,9 +155,9 @@ export const PuestoArtespueanal = (props) => {
         ></Entity>
 
 
-        <Entity primitive="a-camera" position="1.5 7 20" rotation="-6.5 -2.8 -4.2" objeto= "clickable">
+        <Entity primitive="a-camera" position="1.5 7 20" rotation="-6.5 -2.8 -4.2" objeto="clickable">
           <Entity
-          
+
             primitive="a-cursor"
             cursor="downEvents:  ;  upEvents:  rayOrigin:  mouse"
             material={{ color: "black", shader: "flat", opacity: 4 }}
@@ -176,15 +176,15 @@ export const PuestoArtespueanal = (props) => {
         />
         <Entity primitive="a-sky" src="#sky" radius="600" />
         <Entity
-           src= '#logo'
+          src='#logo'
           color="pink"
           primitive="a-plane"
           position="1.035 8.692 -11.02"
           rotation=" 0 0 -180"
-          scale ="2.1 -0.35 1"
+          scale="-2.1 -0.35 1"
           height="10"
           width="10"
-         
+
         />
         <Entity
           primitive="a-light"

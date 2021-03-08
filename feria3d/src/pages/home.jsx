@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "aframe";
 import { Entity, Scene } from "aframe-react";
 import { PuestoArtesanal as PuestoArtesanalIzq } from "../components/puestoartesanalIzq";
@@ -19,23 +19,23 @@ function HomeComponent() {
       });
   
   }, []);
-  function generarPuestos(puestos) {
-    let coordX = -23; //-1.41;
-    let coordY = 6.5; //6.048;
-    let coordZ = 90; //0;
+  const generarPuestos= useCallback((puestos)=> {
+    let coordxIzq = -23; //-1.41;
+    let coordyIzq = 6.5; //6.048;
+    let coordzIzq = 90; //0;
     let esRotado = false;
     let coordxDer = +35;
     let coordyDer = 6.5;
     let coordzDer = 86;
     let htmlP = [];
-    let xEntrarI = -11.3;
-    let yEntrarI = 2.4; 
+    let xEntrarI = -14.160; 
+    let yEntrarI = 7.537; 
     let zEntrarI = 77.56;
     let xEntrarD = 23;
-    let yEntrarD = 2.4;
+    let yEntrarD = 7.537;
     let zEntrarD = 81;
     console.log('der:' + coordxDer, coordyDer, coordzDer);
-    console.log('izq:' + coordX, coordY, coordZ);
+    console.log('izq:' + coordxIzq, coordyIzq, coordzIzq);
     puestos.forEach((puesto) => {
       if (!esRotado) {
         htmlP.push(
@@ -43,16 +43,16 @@ function HomeComponent() {
             key={puesto.pArt_id}
             pArt_id={puesto.pArt_id}
             urlLogo={puesto.pArt_logo}
-            xPuesto={coordX}
-            yPuesto={coordY}
-            zPuesto={coordZ}
+            xPuesto={coordxIzq}
+            yPuesto={coordyIzq}
+            zPuesto={coordzIzq}
             xEntrar={xEntrarI}
             yEntrar={yEntrarI}
             zEntrar={zEntrarI}
             productos={puesto.productos}
           />
         );
-        coordZ -= 35;
+        coordzIzq -= 35;
         zEntrarI -= 35;
         esRotado = !esRotado;
       } else {
@@ -76,7 +76,7 @@ function HomeComponent() {
       }
     });
     return htmlP;
-  };
+  },[])     ;
   return (
     <>
       <Scene>
