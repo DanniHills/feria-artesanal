@@ -30,8 +30,8 @@ export const PuestoArtesanal2 = (props) => {
         */
         let htmlProd = [];
         let mesacentral = 0;// contador producto principales, cantidad maxima en la mesa central
-        let xC1 = props.xPuesto - 10;
-        let yC1 = props.yPuesto + 0.4;
+        let xC1 = props.xPuesto -8;
+        let yC1 = props.yPuesto +0.2;
         let zC1 = props.zPuesto - 4;
 
         let ismesaC = true; // mesa central producto principal al lado 
@@ -46,8 +46,7 @@ export const PuestoArtesanal2 = (props) => {
              }*/
             if (contadorMesaCentral === 1) {
                 contadorMesaCentral = 0;
-
-                zC1 += 2;
+//                zC1 +=2;
             }
             /*if (mesalateralCP < 20 && !producto.prod_principal) { //colocar maximos de productos no principales en mesas laterales n
                 htmlProd.push(<Producto
@@ -85,12 +84,12 @@ export const PuestoArtesanal2 = (props) => {
 
                 if (ismesaC) {
 
-                    xC1 -= 1;
+                    zC1+=3;
+                   // ismesaC = !ismesaC
+                }/* else {
+                    zC1 += 1;
                     ismesaC = !ismesaC
-                } else {
-                    zC1 += 2;
-                    ismesaC = !ismesaC
-                }
+                }*/
                 contadorMesaCentral++;
             }
 

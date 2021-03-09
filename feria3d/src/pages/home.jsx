@@ -24,7 +24,7 @@ function HomeComponent() {
     let coordyIzq = 6.5; //6.048;
     let coordzIzq = 90; //0;
     let esRotado = false;
-    let coordxDer = +35;
+    let coordxDer = 35;
     let coordyDer = 6.5;
     let coordzDer = 86;
     let htmlP = [];
@@ -34,8 +34,7 @@ function HomeComponent() {
     let xEntrarD = 23;
     let yEntrarD = 7.537;
     let zEntrarD = 81;
-    console.log('der:' + coordxDer, coordyDer, coordzDer);
-    console.log('izq:' + coordxIzq, coordyIzq, coordzIzq);
+
     puestos.forEach((puesto) => {
       if (!esRotado) {
         htmlP.push(
