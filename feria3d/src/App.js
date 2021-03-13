@@ -1,5 +1,6 @@
 import { Row } from 'antd';
-import Layout, { Content, Footer, Header } from 'antd/lib/layout/layout';
+import { Content, Footer, Header } from 'antd/lib/layout/layout';
+import { Layout } from "antd";
 import React, { useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
