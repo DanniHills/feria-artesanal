@@ -80,7 +80,7 @@ function HomeComponent() {
   
   },[])     ;
   return (
-    <>
+    <div style={{zIndex: -1}}>
       <Scene>
         <a-assets>
           <img
@@ -125,7 +125,7 @@ function HomeComponent() {
           />
         </Entity>
       </Scene>
-    </>
+    </div>
   );
 }
 export default HomeComponent;
