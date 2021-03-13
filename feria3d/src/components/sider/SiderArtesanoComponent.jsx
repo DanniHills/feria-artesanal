@@ -1,6 +1,5 @@
-import React from "react";
-import { Menu } from "antd";
-import Sider from "antd/lib/layout/Sider";
+import React, { useState } from "react";
+import { Menu, Layout } from "antd";
 import {
   HomeOutlined,
   DesktopOutlined,
@@ -12,11 +11,16 @@ import {
   ShoppingCartOutlined
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-
+const { Sider } = Layout;
 const { SubMenu } = Menu;
 function SiderComponent() {
+  const [collapsed, setCollapsed] = useState(false);
+
+  const onCollapse = collapsed => {
+    setCollapsed(collapsed);
+  };
   return (
-    <Sider trigger={null}>
+    <Sider breakpoint="lg" collapsible collapsed={collapsed} onCollapse={onCollapse}>
       <Menu
         defaultSelectedKeys={["1"]}
         defaultOpenKeys={["sub1"]}

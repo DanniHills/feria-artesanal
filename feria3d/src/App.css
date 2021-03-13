@@ -68,6 +68,12 @@
 .ant-layout-header{
     background: #AC3336;
 }
+.ant-layout-sider-trigger>span{
+    color: #fff;
+}
+.ant-layout-sider-trigger{
+    background-color: #AC3336;
+}
 
 .ant-btn-primary{
     background: #6b1d1d;
