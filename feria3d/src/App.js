@@ -1,4 +1,4 @@
-import { Row } from 'antd';
+import { Row, Col, Checkbox } from 'antd';
 import { Content, Footer, Header } from 'antd/lib/layout/layout';
 import { Layout } from "antd";
 import React, { useState } from 'react';
@@ -70,13 +70,13 @@ function App() {
     let sider = null;
 
     if(!user)
-        sider = <SiderHomeComponent/>
+        sider = <div style={{zIndex:999,}}><SiderHomeComponent/></div>
     
     if(user && user.tipo === 'Administrador')
-        sider = <SiderComponent/>
+        sider = <div style={{zIndex:999, backgroundColor: '#fff'}}><SiderComponent/></div>
 
     if(user && user.tipo === 'Artesano')
-        sider = <SiderArtesanoComponent/>
+        sider = <div style={{zIndex:999, backgroundColor: '#fff'}}><SiderArtesanoComponent/></div>
 
     const loggedLayout = (
         <Layout style={{ minHeight: '100vh' }}>    
@@ -87,6 +87,7 @@ function App() {
                     
                     <Content>
                         <Switch>
+                            
                             {protectedRoutes}  
                         </Switch>
                     </Content>
@@ -125,7 +126,13 @@ function App() {
                     <Layout>
                         
                         <Content>
-                        
+                        <div style={{position:'fixed', top: 100, right: 30, width: 500, height: 200, backgroundColor: 'rgba(0,0,0,0.4)', zIndex: 999}}>
+                                <Row>
+                                    <Col>
+                                    <Checkbox/>
+                                    </Col>
+                                </Row>
+                            </div>
                 <Switch>
                     <Route path="/" exact component={HomeComponent} />
                     <Route path="/login" exact render={login} />
