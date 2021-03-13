@@ -74,7 +74,7 @@ function UbicacionProductosCentralComponent() {
   const SortableList = SortableContainer(({ items }) => (
     <Row className="container" align="top">
       {items.map((item, index) => (
-        <Col    key ={index} style={{ padding: '4px 4px 4px 4px' }}  span={12}> 
+        <Col    key ={index} style={{ padding: '4px 4px 4px 4px' }}  lg={12} md={12} sm={12} xs={12}> 
           <SortableItem
             key={item.index}
             index={index}

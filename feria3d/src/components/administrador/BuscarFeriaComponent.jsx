@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Row,Table, Input, Popconfirm, Form, message, Space } from "antd";
+import { Col, Row,Table, Input, Popconfirm, Form, message, Space, Button } from "antd";
 import AdministradorService from '../../services/administradorService';
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined, DeleteTwoTone, EditTwoTone } from '@ant-design/icons';
+
 
 const administradorService = new AdministradorService();
 
@@ -106,7 +107,7 @@ function BuscarFeriaComponent() {
           {
             title: 'Nombre feria',
             dataIndex: 'feria_nombre',
-            width: '25%',
+            width: '20%',
             editable: true,
           },
           {
@@ -136,13 +137,13 @@ function BuscarFeriaComponent() {
               ) : (
                 <Space size="middle">
             
-            <a  href={() => false} disabled={editingKey !== ''} onClick={() => edit(record)}>
-              Editar
-            </a>  
+            <Button disabled={editingKey !== ''} onClick={() => edit(record)}>
+            <EditTwoTone/>
+            </Button>   
 
               <Popconfirm title="¿Desea eliminar Feria?" onConfirm={() => handleDelete(record.feria_id)}>
-              <a  href={() => false}  disabled={editingKey !== ''}>Eliminar</a>
-            </Popconfirm>
+              <Button disabled={editingKey !== ''} ><DeleteTwoTone   /></Button>
+              </Popconfirm>
             
             </Space>
               );
@@ -167,6 +168,7 @@ function BuscarFeriaComponent() {
         return (
           <Form form={form} component={false}>
             <Table
+            scroll={{ x: 1000 }}
               components={{
                 body: {
                   cell: EditableCell,
@@ -196,6 +198,7 @@ function BuscarFeriaComponent() {
         administradorService.buscarFeria().then(response => {
           response.forEach((feria, index) => {
             response[index].key = index;
+            response[index].feria_std= response[index].feria_std?'Activo':'Inactivo'
           });
           setDataSource(response)
           setLoading(false);
@@ -225,7 +228,7 @@ function BuscarFeriaComponent() {
         <>
         <Row style={{padding: 30}} justify="start" align="top">
           <Col span={24}><h1 style={{fontSize: 25}}>Buscar Feria Artesanal</h1></Col>
-          <Col span={7}>
+          <Col lg={8 } md={8} sm={24} xs={24}>
             <Input  suffix={<SearchOutlined />} placeholder="Ingrese nombre de la feria " onKeyUp={onSearch} />
           </Col>
           

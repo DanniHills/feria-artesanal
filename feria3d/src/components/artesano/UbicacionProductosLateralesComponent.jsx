@@ -65,16 +65,16 @@ function UbicacionProductosLateralesComponent() {
 
   };
   const SortableItem = SortableElement(({ item }) => (
-    <Card > 
-      <img style={{width: '100%', height: '250px'}}alt="" src={item.imageSrc} />
+    <Card> 
+      <img style={{width: '100%', height: '100px'}}alt="" src={item.imageSrc} />
       <p>{item.productos.prod_nombre}</p>
     </Card>
   ));
 // crear contador para generar solo 4 card y colocar offset
   const SortableList = SortableContainer(({ items }) => (
-    <Row className="container" justify="center" align="top">
+    <Row className="container" justify="start" align="top">
       {items.map((item, index) => (
-        <Col  key ={index} style={{ padding: '4px 4px 4px 4px' }} span={6}> 
+        <Col  key ={index} style={{ textAlign:"left" ,padding: '2px 2px 2px 2px' }} lg={6} md={6} sm={6} xs={6}> 
           <SortableItem
             key={item.index}
             index={index}

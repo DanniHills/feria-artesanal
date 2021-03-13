@@ -104,19 +104,19 @@ function BuscarPuestoComponent() {
       {
         title: 'Nombre Puesto Artesanal',
         dataIndex: 'pArt_nombre',
-        width: '25%',
+        width: '20%',
         editable: true,
       },
       {
         title: 'Descripción Puesto Artesanal',
         dataIndex: 'pArt_descrip',
-        width: '50%',
+        width: '40%',
         editable: true,
       },
       {
         title: 'Activo',
         dataIndex: 'pArt_std',
-        width: '15%',
+        width: '10%',
         editable: true,
       },
       {
@@ -195,6 +195,8 @@ function BuscarPuestoComponent() {
     administradorService.buscarPuesto().then(response => {
       response.forEach((puesto, index) => {
         response[index].key = index;
+        response[index].pArt_std= response[index].pArt_std?'Activo':'Inactivo';
+        console.log('respo',response[index].pArt_std);
       });
       setDataSource(response)
       setLoading(false);
@@ -224,7 +226,7 @@ function BuscarPuestoComponent() {
       <>
         <Row style={{padding: 30}} justify="start" align="top">
           <Col span={24}><h1 style={{fontSize: 25}}>Buscar Puesto Artesanal</h1></Col>
-          <Col span={7}>
+          <Col lg={8 } md={8} sm={24} xs={24}>
             <Input  suffix={<SearchOutlined />} placeholder="Ingrese nombre del puesto artesanal " onKeyUp={onSearch} />
           </Col>
           

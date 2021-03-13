@@ -1,10 +1,10 @@
 
 import React, { useEffect, useState } from 'react';
-import { Input, Col, Row, Table, Space, Popconfirm, message } from 'antd';
+import { Input, Col, Row, Table, Space,Button, Popconfirm, message } from 'antd';
 import ArtesanoService from '../../services/artesanoService';
 import SessionService from '../../services/SessionService'
 import { Link } from 'react-router-dom';
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined , DeleteTwoTone,EditTwoTone} from '@ant-design/icons';
 
 
 const artesanoService = new ArtesanoService();
@@ -46,17 +46,17 @@ function BuscarProductoComponent() {
         {
           title: 'Nombre',
           dataIndex: 'prod_nombre',
-          width: '35%',
+          width: '20%',
         },
         {
           title: 'Descripción',
           dataIndex: 'prod_descrip',
-          width: '35%',
+          width: '30%',
         },
         {
           title: 'Nombre puesto',
           dataIndex: 'pArt_nombre',
-          width: '35%',
+          width: '20%',
         },
         {
           title: 'Acciones',
@@ -109,12 +109,12 @@ function BuscarProductoComponent() {
         <>
         <Row style={{padding: 30}} justify="start" align="top">
           <Col span={24}><h1 style={{fontSize: 25}}>Buscar Producto</h1></Col>
-          <Col span={7}>
+          <Col lg={8 } md={8} sm={24} xs={24}>
             <Input  suffix={<SearchOutlined />} placeholder="Ingrese nombre del producto " onKeyUp={onSearch} />
           </Col>
           
           <Col style={{marginTop: 30}} span={24}>
-              <Table locale={locale} loading={loading} dataSource={filterTable == null ? dataSource : filterTable} pagination={dataSource.length > 10 ? true : false} columns={columns} rowKey="prod_id" />
+              <Table        scroll={{ x: 1000 }} locale={locale} loading={loading} dataSource={filterTable == null ? dataSource : filterTable} pagination={dataSource.length > 10 ? true : false} columns={columns} rowKey="prod_id" />
           </Col>
         </Row>
         </>

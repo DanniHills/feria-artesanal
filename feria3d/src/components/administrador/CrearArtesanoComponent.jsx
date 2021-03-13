@@ -29,7 +29,7 @@ function CrearArtesanoComponent() {
     return (
         <Row style={{minHeight: '100%', padding: 30}} justify="center" align="top">
           <Col span={24}><h1 style={{fontSize: 25}}>Crear Artesano</h1></Col>
-          <Col span={7}>
+          <Col lg={8 } md={24} sm={24} xs={24}>
             <Form
               form={form}
               layout="vertical"

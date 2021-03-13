@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Input, Col, Row, Table, Space, Popconfirm, message, Form } from 'antd';
+import { Input, Col, Row, Table, Space, Popconfirm, message, Form, Button } from 'antd';
 import AdministradorService from '../../services/administradorService';
 
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined, EditTwoTone, DeleteTwoTone } from '@ant-design/icons';
 
 const administradorService = new AdministradorService();
 
@@ -135,7 +135,7 @@ function BuscarArtesanoComponent() {
             dataIndex: 'art_nombre',
             width: '15%',
             editable: true,
-            responsive: ['md','lg','xl'],
+            
             
           },
           {
@@ -143,40 +143,39 @@ function BuscarArtesanoComponent() {
             dataIndex: 'art_apellido',
             width: '15%',
             editable: true,
-            responsive: [ 'md','lg','xl'],
+          
           },
           {
             title: 'Rut',
             dataIndex: 'art_rut',
             width: '15%',
             editable: true,
-            responsive: [ 'md','lg',' xl'],
+           
           },
           {
             title: 'Telefono ',
             dataIndex: 'art_fono',
             width: '15%',
             editable: true,
-            responsive: ['md','lg','xl'],
+          
           },
           {
             title: 'Correo',
             dataIndex: 'art_correo',
             width: '15%',
             editable: true,
-            responsive: ['md','lg', 'xl'],
+            
           },
           {
             title: 'Estado',
             dataIndex: 'art_std',
             width: '15%',
             editable: true,
-            responsive: [  'md','lg', 'xl'], 
+             
           },
           {
             title: 'Acciones',
             dataIndex: 'Acciones',
-            responsive: ['md','lg','xl'],
             render: (_, record) => {
               const editable = isEditing(record);
               return editable ? (
@@ -189,13 +188,13 @@ function BuscarArtesanoComponent() {
               ) : (
                 <Space size="middle">
             
-            <a  href={() => false} disabled={editingKey !== ''} onClick={() => edit(record)}>
-              Editar
-            </a>  
+            <Button disabled={editingKey !== ''} onClick={() => edit(record)}>
+            <EditTwoTone/>
+            </Button>  
 
               <Popconfirm title="¿Desea eliminar Feria?" onConfirm={() => handleDelete(record.art_id)}>
-                 <a  href={() => false} disabled={editingKey !== ''}>Eliminar</a>
-            </Popconfirm>
+              <Button disabled={editingKey !== ''} ><DeleteTwoTone   /></Button>
+               </Popconfirm>
            
             </Space>
               );
@@ -220,6 +219,7 @@ function BuscarArtesanoComponent() {
         return (
           <Form form={form} component={false}>
             <Table  
+            scroll={{ x: 1000 }}
               locale={locale} 
               components={{
                 body: {
@@ -241,8 +241,12 @@ function BuscarArtesanoComponent() {
 
       useEffect( () => {
         administradorService.buscarArtesanos().then(response => {
+          response.forEach((e) => {
+           e.art_std= e.art_std?'Activo':'Inactivo'
+          });
           setDataSource(response)
           setLoading(false);
+         
         }).catch(err => {
           setLoading(false);
           message.error('Error de conexión con el servidor.');
@@ -270,7 +274,7 @@ function BuscarArtesanoComponent() {
        
        <Row style={{padding: 30}} justify="start" align="top">
           <Col span={24}><h1 style={{fontSize: 25}}>Buscar Artesano</h1></Col>
-          <Col sm={6} md={8} lg={10} xl={12}>
+          <Col lg={8 } md={8} sm={24} xs={24}>
             <Input  suffix={<SearchOutlined />} placeholder="Ingrese datos " onKeyUp={onSearch} />
           </Col>
           

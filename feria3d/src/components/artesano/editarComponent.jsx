@@ -192,7 +192,7 @@ function EditarComponent() {
       >
         <Form form={form} layout="vertical" onFinish={handleOk}>
           <Row gutter={24}>
-            <Col span={8}>
+            <Col  lg={10} md={10} sm={24} xs={24}>
               <Form.Item name="prod_nombre" label="Nombre">
                 <p>
                   <Input
@@ -204,7 +204,7 @@ function EditarComponent() {
               </Form.Item>
             </Col>
 
-            <Col span={8}>
+            <Col   lg={{span:10, offset:2}} md={{span:10, offset:2}} sm={24} xs={24}>
               <Form.Item
                 name="mat_id"
                 rules={[
@@ -226,7 +226,7 @@ function EditarComponent() {
                 </p>
               </Form.Item>
             </Col>
-            <Col span={24}>
+            <Col  lg={24} md={24} sm={24} xs={24}>
               <Form.Item name="prod_descrip" label="Descripción">
                 <p>
                   <TextArea
@@ -238,14 +238,14 @@ function EditarComponent() {
                 </p>
               </Form.Item>
             </Col>
-            <Col span={24}>
+            <Col  lg={24 } md={24} sm={24} xs={24}>
               <Form.Item name="prod_principal">
                 <p>
                   <Checkbox onChange={onChange}>Producto principal</Checkbox>
                 </p>
               </Form.Item>
             </Col>
-            <Col span={24}>
+            <Col lg={24} md={24}sm={24} xs={24}>
               <Form.Item name="prod_scale" label="Escala">
                 <p>
                   {" "}
@@ -258,7 +258,7 @@ function EditarComponent() {
                 </p>
               </Form.Item>
             </Col>
-            <Col span={12}>
+            <Col lg={11} md={11} sm={24} xs={24}>
               <Form.Item
                 name="prod_imagen"
                 label="Imagen"
@@ -279,7 +279,7 @@ function EditarComponent() {
                 </Dragger>
               </Form.Item>
             </Col>
-            <Col span={12}>
+            <Col lg={{span:11, offset:2}} md={{span:11, offset:2}} sm={24} xs={24}>
               <Form.Item
                 name="prod_modelo"
                 label="Modelo"

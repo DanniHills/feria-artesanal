@@ -79,15 +79,15 @@ function UbicacionPuestosComponent() {
 
   return (
     <>
-      <Row style={{ padding: 30 }} justify="start" align="top">
+      <Row style={{ paddingTop:25 }} justify="center" align="top">
         <Col span={24}><h1 style={{ fontSize: 25 }}>Asignación de Puestos Artesanales</h1></Col>
         <Divider orientation="left">Configuración </Divider>
 
-        <Col style={{ marginTop: 30 }} span={6} offset={6}>
+        <Col style={{ marginTop: 30 }} span={8} >
           {ubicacion.length>0 &&
           <SortableList items={ubicacion}></SortableList>}
         </Col>
-        <Col style={{ marginTop: 30 }} span={6}>
+        <Col style={{ marginTop: 30 }}  span ={8}>
           {tecnicas.length > 0 &&
             <SortableList items={tecnicas} onSortEnd={onSortEnd}></SortableList>
           }

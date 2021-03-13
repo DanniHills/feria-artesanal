@@ -115,7 +115,7 @@ artesanoService
       <Col span={24}>
         <h1 style={{ fontSize: 25 }}>Crear Producto</h1>
       </Col>
-      <Col span={12}>
+      <Col lg={10} md={10} sm={24} xs={24}>
         <Form
           form={form}
           layout="vertical"
@@ -124,8 +124,8 @@ artesanoService
             remember: true,
           }}
         >
-          <Row gutter={24}>
-            <Col span={8}>
+          <Row >
+            <Col lg={12} md={12} sm={24} xs={24}  >
               <Form.Item
                 name="prod_nombre"
                 rules={[
@@ -137,7 +137,7 @@ artesanoService
               </Form.Item>
             </Col>
 
-            <Col span={8}>
+            <Col lg={{span:10, offset:2}} md={{span:10, offset:2}} sm={24} xs={24}  >
               <Form.Item
                 name="pArt_id"
                 rules={[
@@ -153,7 +153,7 @@ artesanoService
                 </Select>
               </Form.Item>
             </Col>
-            <Col span={8}>
+            <Col lg={12 } md={12} sm={24} xs={24}>
               <Form.Item
                 name="mat_id"
                 rules={[
@@ -169,7 +169,16 @@ artesanoService
                 </Select>
               </Form.Item>
             </Col>
-            <Col span={24}>
+            <Col lg={{span:10, offset:2}} md={{span:10, offset:2}}sm={24} xs={24}>
+              <Form.Item
+                name="prod_scale"
+                rules={[{ required: true, message: "Debes ingresar escala." }]}
+                label="Escala"
+              >
+                <InputNumber></InputNumber>
+              </Form.Item>
+            </Col>
+            <Col lg={24} md={24} sm={24} xs={24}>
               <Form.Item
                 name="prod_descrip"
                 rules={[
@@ -180,22 +189,14 @@ artesanoService
                 <TextArea rows={4} />
               </Form.Item>
             </Col>
-            <Col span={24}>
+            <Col lg={24 } md={24} sm={24} xs={24}>
               <Form.Item name="prod_principal">
                 <Checkbox onChange={onChange}>Producto principal</Checkbox>
               </Form.Item>
             </Col>
-            <Col span={24}>
-              <Form.Item
-                name="prod_scale"
-                rules={[{ required: true, message: "Debes ingresar escala." }]}
-                label="Escala"
-              >
-                <InputNumber></InputNumber>
-              </Form.Item>
-            </Col>
+           
 
-            <Col span={6}>
+            <Col lg={11} md={11} sm={24} xs={24}>
               <Form.Item
                 name="prod_imagen"
                 rules={[
@@ -222,7 +223,7 @@ artesanoService
                 </Dragger>
               </Form.Item>
             </Col>
-            <Col span={6}>
+            <Col lg={{span:11, offset:2}} md={{span:11, offset:2}} sm={24} xs={24} >
               <Form.Item
                 name="prod_modelo"
                 rules={[
@@ -250,7 +251,7 @@ artesanoService
               </Form.Item>
             </Col>
 
-            <Col span={24}>
+            <Col span={24} style={{textAlign:"center", marginTop:25}}>
               <Form.Item>
                 <Button
                   disabled={loading}

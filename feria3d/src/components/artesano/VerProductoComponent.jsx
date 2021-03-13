@@ -2,17 +2,19 @@ import React, { useEffect, useState } from "react";
 import {
   Row,
   Col,
-  Descriptions,
+  List,
   Button,
+  Card,
 } from "antd";
 import CatalogoService from "../../services/CatalogoService";
 import { Link, useParams } from "react-router-dom";
 import "@google/model-viewer";
 
 import EditarComponent from "../artesano/editarComponent";
+import Text from "antd/lib/typography/Text";
 
-function VerProductoComponent() { 
-  
+function VerProductoComponent() {
+
   const prod_id = useParams().prod_id;
   console.log(prod_id);
   const uploadsUrl = "http://localhost/";
@@ -30,7 +32,7 @@ function VerProductoComponent() {
       });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
- 
+
   return (
     <>
       <Row style={{ padding: 30 }} justify="start" align="top">
@@ -39,8 +41,8 @@ function VerProductoComponent() {
         </Col>
         {producto && (
           <Col style={{ marginTop: 30 }} span={24}>
-            <Row gutter={16}>
-              <Col span={12}>
+            <Row gutter={24}>
+              <Col lg={10} md={24} sm={24} xs={24} style={{marginBottom:25}}>
                 <model-viewer
                   style={{ width: "100%", height: "100" }}
                   id="reveal"
@@ -52,32 +54,23 @@ function VerProductoComponent() {
                   alt="A 3D model of a shishkebab"
                 />
               </Col>
-              <Col span={12}>
-                <Descriptions bordered>
-                  <Descriptions.Item
-                    label={"Nombre: " + producto.prod_nombre}
-                    span={6}
-                  >
-                    {" "}
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    label={"Descripción: " + producto.prod_descrip}
-                    span={6}
-                  >
-                    {" "}
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    label={"Principal:" + (producto.prod_principal? '  Si':'  No')}
-                    span={6}
-                  >
-                    {" "}
-                  </Descriptions.Item>
-                </Descriptions>
-                <EditarComponent/>  
-                <Link to={"/artesano/buscarProducto"} justify="end">
-                  <Button type="primary">Volver</Button>
-                </Link>
+              <Col lg={12} md={24} sm={24} xs={24}  >
+                <Card>
+                  <List bordered>
+                    <List.Item style={{ textAlign: "center" }}> <Text strong  underline>Información de Producto </Text></List.Item>
+                    <List.Item>Nombre: {producto.prod_nombre}</List.Item>
+                    <List.Item>Descripción:{producto.prod_descrip}</List.Item>
+                    <List.Item>Principal: {(producto.prod_principal ? '  Si' : '  No')}</List.Item>
+                  </List>
+                </Card>
+               
               </Col>
+              <Col span={24} style={{ textAlign: "center", marginTop: 25 }}>
+                  <EditarComponent />
+                  <Link to={"/artesano/buscarProducto"}>
+                    <Button type="primary">Volver</Button>
+                  </Link>
+                </Col>
             </Row>
           </Col>
         )}
