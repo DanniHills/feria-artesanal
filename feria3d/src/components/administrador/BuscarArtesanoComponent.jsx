@@ -135,40 +135,48 @@ function BuscarArtesanoComponent() {
             dataIndex: 'art_nombre',
             width: '15%',
             editable: true,
+            responsive: ['md','lg','xl'],
+            
           },
           {
             title: 'Apellido Artesano',
             dataIndex: 'art_apellido',
             width: '15%',
             editable: true,
+            responsive: [ 'md','lg','xl'],
           },
           {
             title: 'Rut',
             dataIndex: 'art_rut',
             width: '15%',
             editable: true,
+            responsive: [ 'md','lg',' xl'],
           },
           {
             title: 'Telefono ',
             dataIndex: 'art_fono',
             width: '15%',
             editable: true,
+            responsive: ['md','lg','xl'],
           },
           {
             title: 'Correo',
             dataIndex: 'art_correo',
             width: '15%',
             editable: true,
+            responsive: ['md','lg', 'xl'],
           },
           {
             title: 'Estado',
             dataIndex: 'art_std',
             width: '15%',
             editable: true,
+            responsive: [  'md','lg', 'xl'], 
           },
           {
             title: 'Acciones',
             dataIndex: 'Acciones',
+            responsive: ['md','lg','xl'],
             render: (_, record) => {
               const editable = isEditing(record);
               return editable ? (
@@ -211,7 +219,7 @@ function BuscarArtesanoComponent() {
         });
         return (
           <Form form={form} component={false}>
-            <Table
+            <Table  
               locale={locale} 
               components={{
                 body: {
@@ -262,11 +270,11 @@ function BuscarArtesanoComponent() {
        
        <Row style={{padding: 30}} justify="start" align="top">
           <Col span={24}><h1 style={{fontSize: 25}}>Buscar Artesano</h1></Col>
-          <Col span={7}>
-            <Input  suffix={<SearchOutlined />} placeholder="Ingrese dato " onKeyUp={onSearch} />
+          <Col sm={6} md={8} lg={10} xl={12}>
+            <Input  suffix={<SearchOutlined />} placeholder="Ingrese datos " onKeyUp={onSearch} />
           </Col>
           
-          <Col style={{marginTop: 30}} span={24}>
+          <Col style={{marginTop: 30}} >
             <EditableTable />
           </Col>
         </Row>

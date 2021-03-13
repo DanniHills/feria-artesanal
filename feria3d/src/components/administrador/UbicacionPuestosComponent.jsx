@@ -64,13 +64,16 @@ function UbicacionPuestosComponent() {
     setTecnicas(newtecnicas);
     let tecnicasID = [];
     newtecnicas.forEach(tecNew => {
+      console.log(tecNew)
       tecnicasOld.forEach(tecOld => {
         if (tecOld.tec_nombre === tecNew) {
+          console.log(tecOld.tec_id)
           tecnicasID.push(tecOld.tec_id);
         }
       });
     });
     const tecId = JSON.stringify(tecnicasID);
+    console.log(tecnicasID)
     puestosService.ordenarPuestos(tecId);
   };
 

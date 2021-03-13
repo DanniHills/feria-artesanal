@@ -160,7 +160,7 @@ exports.ubicacionTecnicas = async (req, res) => {
     });
     res.send({status:'Ok'});
 }
-//puestos ordenados por ubicacion
+//puestos ordenados por ubicacion -> esta demás
 exports.ordenUbicacion = (req,res)=>{
     PuestoArtesanal.findAll({ order:[['pArt_ubicacion', 'ASC']] } )
     .then(data => {

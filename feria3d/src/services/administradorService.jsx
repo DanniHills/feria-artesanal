@@ -20,7 +20,7 @@ export default class AdministradorService{
         .then(response => response.json())
     }
     buscarUnArtesanos(art_id){
-        return fetch('http://localhost:8080/api/artesano'+ art_id, {method: 'GET', headers: { 'Content-Type': 'application/json' }})
+        return fetch('http://localhost:8080/api/artesano/'+ art_id, {method: 'GET', headers: { 'Content-Type': 'application/json' }})
         .then(response => response.json())
     }
     crearFeria(feria){

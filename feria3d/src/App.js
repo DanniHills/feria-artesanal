@@ -21,7 +21,8 @@ import CatalogoComponent from "./components/Catalogo/CatalogoComponent";
 import SessionService from './services/SessionService';
 import DetalleProd from './components/Catalogo/Detalleprod';
 import UbicacionPuestosComponent from './components/administrador/UbicacionPuestosComponent';
-import UbicacionProductosComponent from './components/artesano/UbicacionProductosComponent';
+import UbicacionProductosLateralesComponent from './components/artesano/UbicacionProductosLateralesComponent';
+import UbicacionProductosCentralComponent from './components/artesano/UbicacionProductosCentralComponent';
 import VerProductoComponent from './components/artesano/VerProductoComponent';
 import PuestoIndividual from './components/puestoIndividual';
 import SortableComponent from './components/artesano/test'
@@ -52,7 +53,8 @@ function App() {
             <Route path="/administrador/ubicacion" component={UbicacionPuestosComponent} />,
             <Route path="/artesano/crearProducto" exact component={CrearProductoComponent} />,
             <Route path="/artesano/buscarProducto" exact component={BuscarProductoComponent} />,
-            <Route path="/artesano/ubicacion" component={UbicacionProductosComponent} />,
+            <Route path="/artesano/ubicacion/Laterales" exact component={UbicacionProductosLateralesComponent} />,
+            <Route path="/artesano/ubicacion/Central" exact component={UbicacionProductosCentralComponent} />,
             <Route path="/administrador/CrearFeria" exact component={CrearFeriaComponent} />,
             <Route path="/administrador/BuscarFeria" exact component={BuscarFeriaComponent}/>,
             <Route path="/administrador/CrearPuesto" exact component={CrearPuestoComponent}/>,

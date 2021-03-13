@@ -71,7 +71,7 @@ export const PuestoArtesanal2 = (props) => {
             }*/
 
             //MESA CENTRAL + PRODUCTOS PRINCIPALES
-            if (mesacentral < 11 && producto.prod_principal) {// maximo productos principales mesa central
+            if (mesacentral < 11 && producto.prod_principal && producto.prod_std) {// maximo productos principales mesa central
                 htmlProd.push(<Producto
                     key={producto.prod_id}
                     prod_id={producto.prod_id}

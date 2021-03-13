@@ -36,6 +36,7 @@ function HomeComponent() {
     let zEntrarD = 81;
 
     puestos.forEach((puesto) => {
+      if (puesto.pArt_std){
       if (!esRotado) {
         htmlP.push(
           <PuestoArtesanalIzq
@@ -73,8 +74,10 @@ function HomeComponent() {
         zEntrarD -= 35;
         esRotado = !esRotado;
       }
+    }
     });
     return htmlP;
+  
   },[])     ;
   return (
     <>

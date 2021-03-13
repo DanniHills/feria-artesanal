@@ -32,17 +32,22 @@ function SiderComponent() {
           <Menu.Item key="3" icon={<SearchOutlined />}>
             <Link to="/artesano/buscarProducto">Buscar Producto</Link>
           </Menu.Item>
-          <Menu.Item key="4" icon={<PushpinOutlined />}>
-            <Link to="/artesano/ubicacion">Definir Ubicación</Link>
-          </Menu.Item>
+          <SubMenu key="4" icon={<PushpinOutlined />} title="Definir Ubicación">
+            <Menu.Item key="5" icon={<SearchOutlined />}>
+              <Link to="/artesano/ubicacion/Laterales">Mesa Laterales</Link>
+            </Menu.Item>
+            <Menu.Item key="6" icon={<SearchOutlined />}>
+              <Link to="/artesano/ubicacion/Central">Mesa Central</Link>
+            </Menu.Item>
+          </SubMenu>
         </SubMenu>
-        <Menu.Item key="5" icon={<PictureOutlined /> }>
-           <Link to="/">Feria3D</Link>
-          </Menu.Item>
-          <Menu.Item key="6" icon={<ShoppingCartOutlined />} >
-                     <Link to="/Catalogo">Catálogo</Link>
-          </Menu.Item>
-        <Menu.Item key="7" icon={<DesktopOutlined />}>
+        <Menu.Item key="7" icon={<PictureOutlined />}>
+          <Link to="/">Feria3D</Link>
+        </Menu.Item>
+        <Menu.Item key="8" icon={<ShoppingCartOutlined />} >
+          <Link to="/Catalogo">Catálogo</Link>
+        </Menu.Item>
+        <Menu.Item key="9" icon={<DesktopOutlined />}>
           <Link to="/logout">Cerrar sesión</Link>
         </Menu.Item>
       </Menu>

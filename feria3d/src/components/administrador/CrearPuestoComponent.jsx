@@ -117,7 +117,7 @@ function CrearPuestoComponent() {
                 message: "Debes ingresar el nombre de la Puesto Artesanal.",
               },
             ]}
-            label="Nombre de la Puesto Artesanal"
+            label="Nombre del   Puesto Artesanal"
           >
             <Input />
           </Form.Item>

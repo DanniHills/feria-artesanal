@@ -164,7 +164,8 @@ function BuscarPuestoComponent() {
     });
     return (
       <Form form={form} component={false}>
-        <Table
+        <Table 
+         scroll={{ x: 1000 }}
           components={{
             body: {
               cell: EditableCell,

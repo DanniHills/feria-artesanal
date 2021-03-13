@@ -23,7 +23,7 @@ export const PuestoArtespueanal = (props) => {
     }).catch((e) => {
       console.log(e);
     });
-  }, [props.productos]);
+  }, []); //[props.productos]
   const generarProductos = useCallback(() => {
     let xM1 = 0;
     let yM1 = 6.048;

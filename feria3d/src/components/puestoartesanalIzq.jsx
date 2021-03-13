@@ -3,7 +3,6 @@ import 'aframe';
 import { Entity } from 'aframe-react';
 import { Producto } from './producto';
 import { useHistory } from 'react-router-dom';
-import arbol from "../assets/img/arbol.glb";
 export const PuestoArtesanal = (props) => {
 
     const uploadUrl = 'http://localhost/';
