@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Card, Row, Col, Input } from "antd";
-import { SearchOutlined } from '@ant-design/icons';
+import { Card, Row, Col, Checkbox, Menu } from "antd";
 import CatalogoService from "../../services/CatalogoService";
 import { Link } from "react-router-dom";
+import SubMenu from "antd/lib/menu/SubMenu";
+import {UserOutlined} from "@ant-design/icons";
 
-const {Meta} =Card
+const { Meta } = Card
 function CatalogoComponent() {
-  
+
   const uploadsUrl = 'http://localhost/';
   const [Catalogo, setCatalogo] = useState([]);
 
@@ -14,13 +15,16 @@ function CatalogoComponent() {
     CatalogoService.obtenerCatalogo()
       .then((res) => {
         console.log(res);
-       // setPuestos(res);
-       setCatalogo( generarCatalogo(res)) ;
+        // setPuestos(res);
+        setCatalogo(generarCatalogo(res));
       })
       .catch((e) => {
         console.log(e);
       });
   }, []);
+  function onChange(e) {
+    console.log(`checked = ${e.target.checked}`);
+  }
   function generarCatalogo(puestos) {
 
     let Catalogo = [];
@@ -30,37 +34,57 @@ function CatalogoComponent() {
         Catalogo.push(
           <Col span={6}>
             <Link to={"/detalle/" + producto.prod_id}>
-              <Card 
+              <Card
                 hoverable
-                cover={<img  style={{width: '100%', height: '250px'}} alt="example" src={uploadsUrl + producto.prod_imagen} />}
+                cover={<img style={{ width: '100%', height: '250px' }} alt="example" src={uploadsUrl + producto.prod_imagen} />}
               >
                 <Meta title={producto.prod_nombre} />
               </Card>
             </Link>
           </Col>
         );
-      } 
+      }
     });
     return Catalogo;
   }
+
   return (
     <>
-      <Row style={{padding: 30}} justify="start" align="top">
-        <Col span={24}><h1 style={{fontSize: 25}}>Catalogo</h1></Col>
-        <Col span={7}>
-          <Input  suffix={<SearchOutlined />} placeholder="Ingrese nombre del producto " />
-        </Col>
+      <Row style={{ padding: 30 }} justify="start" align="stretch">
+        <Col span={24}><h1 style={{ fontSize: 25 }}>Catálogo</h1></Col>
+        <Col span={4}>
+          <Menu defaultSelectedKeys={["1"]}
+            defaultOpenKeys={["sub1"]}
+            mode="inline">
+              <SubMenu Key="sub1" icon={<UserOutlined/>} title="Artesanos">
+                <Menu.Item >
+                <Checkbox onChange={onChange}>Checkbox</Checkbox>
+                </Menu.Item>
+              </SubMenu>
+              <SubMenu Key="sub1" icon={<UserOutlined/>} title="Tecnicas">
+                <Menu.Item >
+                <Checkbox onChange={onChange}>Checkbox</Checkbox>
+                </Menu.Item>
+              </SubMenu>
+              <SubMenu Key="sub1" icon={<UserOutlined/>} title="Materiales">
+                <Menu.Item >
+                <Checkbox onChange={onChange}>Checkbox</Checkbox>
+                </Menu.Item>
+              </SubMenu>
+          </Menu>
         
-        <Col style={{marginTop: 30}} span={24}>
-          <Row gutter={[16, 24]}>
-            {Catalogo}            
+        </Col>
+        <Col style={{ marginTop: 30 }} span={20}>
+
+          <Row gutter={[16, 24]} justify="start" align="stretch">
+            {Catalogo}
           </Row>
         </Col>
       </Row>
 
 
 
-      
+
     </>
   );
 }

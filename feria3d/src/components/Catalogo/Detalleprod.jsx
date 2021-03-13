@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Descriptions, Button } from "antd";
+import { Row, Col, Button, List,  Card } from "antd";
 import CatalogoService from "../../services/CatalogoService";
 import { Link, useParams } from "react-router-dom";
 import '@google/model-viewer';
 import ArtesanoService from "../../services/artesanoService";
+import Text from "antd/lib/typography/Text";
 
 
 function DetalleProd() {
@@ -13,26 +14,26 @@ function DetalleProd() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const artesanoService = new ArtesanoService();
   const [informacion, setInformacion] = useState(null);
-
+  
   useEffect(() => {
     CatalogoService.detalleProducto(prod_id)
       .then((res) => {
-        console.log("res2", res)
         setProducto(res);
       })
       .catch((e) => {
         console.log(e);
       });
-  }, [prod_id]); 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     artesanoService.informacionProductoArtesano(prod_id).then((res) => {
-      console.log("res1", res);
       setInformacion(res);
     }).catch((e) => {
       console.log(e);
     });
-  }, [artesanoService, prod_id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
 
@@ -44,7 +45,7 @@ function DetalleProd() {
 
           <Col style={{ marginTop: 30 }} span={24}>
             <Row gutter={16}>
-              <Col span={12}>
+              <Col lg={12} md={24} sm={24} xs={24}>
                 <model-viewer
                   style={{ width: '100%', height: '500px' }}
                   id="reveal"
@@ -56,19 +57,23 @@ function DetalleProd() {
                   alt="A 3D model of a shishkebab"
                 />
               </Col>
-              <Col span={12}>
-                <Descriptions bordered>
-                  <Descriptions.Item label={'Nombre: ' + producto.prod_nombre} span={6}> </Descriptions.Item>
-                  <Descriptions.Item label={'Descripción: ' + producto.prod_descrip} span={6}> </Descriptions.Item>
-                  <Descriptions.Item label={'puesto: ' + producto.pArt_id} span={6}></Descriptions.Item>
-                  <Descriptions.Item label={'Información de Contacto'} span={6}> </Descriptions.Item>
-                  <Descriptions.Item label={'Artesano:  ' + informacion.art_nombre +" "+ informacion.art_apellido} span={6}> </Descriptions.Item>
-                  <Descriptions.Item label={'Telefono:  '+informacion.art_fono} span={6}> </Descriptions.Item>
-                  <Descriptions.Item label={'Correo:   '+ informacion.art_correo}span={6}> </Descriptions.Item>
-                </Descriptions>
-
-                < Link to={"/Catalogo"} justify="end"><Button type="primary" >Volver al Catátalogo</Button></Link>
-
+              <Col  lg={12} md={24} sm={24} xs={24} >
+                <Card style={{padding:0}}>
+                <List bordered  style={{margin:0}}
+                >
+                  <List.Item style={{textAlign:"center"}}> <Text strong>Información de Producto </Text></List.Item>
+                  <List.Item >Nombre:  {producto.prod_nombre} </List.Item>
+                  <List.Item >Descripción: {producto.prod_descrip } </List.Item>
+                  <List.Item >Puesto Artesanal: {producto.pArt_id}</List.Item>
+                  <List.Item style={{textAlign:"center"}}> <Text strong>Información de Contacto </Text></List.Item>
+                  <List.Item >Artesano:  { informacion.art_nombre }  {informacion.art_apellido} </List.Item>
+                  <List.Item >Telefono: {informacion.art_fono} </List.Item>
+                  <List.Item >Correo:{ informacion.art_correo} </List.Item>
+                </List>
+                </Card>
+                <Col span={24} style={{textAlign:"center", marginTop:25}}>
+                < Link to={"/Catalogo"}  ><Button type="primary" >Volver al Catátalogo</Button></Link>
+                </Col>
 
               </Col>
             </Row>
