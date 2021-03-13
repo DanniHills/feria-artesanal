@@ -126,13 +126,7 @@ function App() {
                     <Layout>
                         
                         <Content>
-                        <div style={{position:'fixed', top: 100, right: 30, width: 500, height: 200, backgroundColor: 'rgba(0,0,0,0.4)', zIndex: 999}}>
-                                <Row>
-                                    <Col>
-                                    <Checkbox/>
-                                    </Col>
-                                </Row>
-                            </div>
+                        
                 <Switch>
                     <Route path="/" exact component={HomeComponent} />
                     <Route path="/login" exact render={login} />
