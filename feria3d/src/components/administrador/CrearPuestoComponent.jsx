@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Form, Input, Button, Col, Row, message, Select } from "antd";
 import AdministradorService from "../../services/administradorService";
 import TecnicaService from "../../services/TecnicaService";
+import Dragger from "antd/lib/upload/Dragger";
+import { InboxOutlined } from "@ant-design/icons";
 
 const administradorService = new AdministradorService();
 const tecnicaService = new TecnicaService();
@@ -15,10 +17,11 @@ function CrearPuestoComponent() {
   const [tecnica, setTecnica] = useState([]);
   const [feria, setFeria] = useState([]);
   const { Option } = Select;
+  const [archivoImagen, setArchivoImagen] = useState([]);
 
   const onFinish = (puesto) => {
     setLoading(true);
-  
+
     let formulario = new FormData();
     formulario.append("feria_id", puesto.feria_id);
     formulario.append("art_id", puesto.art_id);
@@ -26,8 +29,9 @@ function CrearPuestoComponent() {
     formulario.append("pArt_nombre", puesto.pArt_nombre);
     formulario.append("pArt_descrip", puesto.pArt_descrip);
     formulario.append("pArt_std", puesto.pArt_std);
-    //formulario.append("pArt_logo", archivoImagen[0]);
-    formulario.append("pArt_ubicación",puesto.pArt_ubicación );
+    formulario.append("pArt_logo", archivoImagen[0]);
+    formulario.append("pArt_ubicación", puesto.pArt_ubicación);
+
 
     console.log("Received values of form: ", formulario);
     administradorService
@@ -40,6 +44,7 @@ function CrearPuestoComponent() {
         }
         message.success("Puesto artesanal creado correctamente");
         form.resetFields();
+        setArchivoImagen([]);
         setLoading(false);
       })
       .catch((err) => {
@@ -47,7 +52,14 @@ function CrearPuestoComponent() {
         setLoading(false);
       });
   };
-
+  const eliminarArchivoImagen = (file) => {
+    setArchivoImagen([]);
+    console.log("onremovefile");
+  };
+  const agregarArchivoImagen = (file) => {
+    setArchivoImagen([file]);
+    return false;
+  };
 
   useEffect(() => {
     administradorService.buscarArtesanos().then((response) => {
@@ -100,7 +112,7 @@ function CrearPuestoComponent() {
       <Col span={24}>
         <h1 style={{ fontSize: 25 }}>Crear Puesto Artesanal</h1>
       </Col>
-      <Col lg={8 } md={24} sm={24} xs={24}>
+      <Col lg={8} md={24} sm={24} xs={24}>
         <Form
           form={form}
           layout="vertical"
@@ -114,7 +126,7 @@ function CrearPuestoComponent() {
             rules={[
               {
                 required: true,
-                message: "Debes ingresar el nombre de la Puesto Artesanal.",
+                message: "Debes ingresar el nombre del Puesto Artesanal.",
               },
             ]}
             label="Nombre del   Puesto Artesanal"
@@ -152,7 +164,7 @@ function CrearPuestoComponent() {
             ]}
             label="Técnica"
           >
-          <Select style={{ width: "100%" }}>{tecnica}</Select>
+            <Select style={{ width: "100%" }}>{tecnica}</Select>
           </Form.Item>
           <Form.Item
             name="feria_id"
@@ -166,6 +178,37 @@ function CrearPuestoComponent() {
           >
             <Select style={{ width: "100%" }}>{feria}</Select>
           </Form.Item>
+          <Form.Item>
+            <Col lg={11} md={11} sm={24} xs={24}>
+              <Form.Item
+                name="pArt_logo"
+                rules={[
+                  {
+                    required: true,
+                    message: "Debes ingresar la imagen del logo del puesto artesanal.",
+                  },
+                ]}
+                label="Imagen"
+              >
+                <Dragger
+                  accept=".png,.jpg"
+                  beforeUpload={agregarArchivoImagen.bind(this)}
+                  onRemove={eliminarArchivoImagen.bind(this)}
+                  fileList={archivoImagen}
+                >
+                  <p className="ant-upload-drag-icon">
+                    <InboxOutlined />
+                  </p>
+                  <p className="ant-upload-text">
+                    Click o arrastra y suelta para agregar archivos
+                  </p>
+                  <p className="ant-upload-hint"></p>
+                </Dragger>
+              </Form.Item>
+            </Col>
+
+          </Form.Item>
+
           <Form.Item>
             <Button
               disabled={loading}

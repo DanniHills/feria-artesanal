@@ -4,36 +4,38 @@ const PuestoArtesanal = db.puestosArtesanales;
 const Op = db.Sequelize.Op;
 const Productos = db.productos;
 const Artesanos = db.artesanos;
+var mkdirp = require('mkdirp');
+
 // Create and Save a new puesto Artesanal
 exports.create = (req, res) => {
-    // Validate request
-    //req.body -> contenido de la petición 
-    //req.params -> parametros de la url -> se establece en la ruta /:algo/:otroparametro
-    //req.query-> saca url condicion? nombre variable = algo
-    //if (!req.body.pArt_id) {
-    /*    res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }*/
-
-    // Create a puesto Artesanal
+    const archivoImagen = req.files.pArt_logo;
     const puestoArtesanal = {
+        
         pArt_id: req.body.pArt_id,
         feria_id: req.body.feria_id,
         art_id: req.body.art_id,
         tec_id: req.body.tec_id,
         pArt_nombre: req.body.pArt_nombre,
         pArt_descrip: req.body.pArt_descrip,
-        pArt_logo: req.body.pArt_logo,
+        pArt_logo:'',
         pArt_std: req.body.pArt_std,
         pArt_ubicacion: req.body.tec_id
 
     };
-
+       
     // Guardar en la bd un puesto Artesanal
     PuestoArtesanal.create(puestoArtesanal)
-        .then(data => {
+        .then( async (data) => {
+            console.log('pArt_id ', data.dataValues.pArt_id);
+            const rutaLogo = 'feria_' + puestoArtesanal.feria_id + '/puesto_' + data.dataValues.pArt_id;
+            puestoArtesanal.pArt_logo = rutaLogo +'/' + archivoImagen.name;
+            await PuestoArtesanal.update(puestoArtesanal, {
+                where: { pArt_id: data.dataValues.pArt_id }
+            }).then(up =>{
+                mkdirp('./uploads/' + rutaLogo).then(data => {
+                    archivoImagen.mv('./uploads/' + rutaLogo + '/' + archivoImagen.name);
+                       });
+            })
             res.send(data);
         })
         .catch(err => {
