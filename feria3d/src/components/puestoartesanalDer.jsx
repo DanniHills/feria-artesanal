@@ -105,7 +105,7 @@ export const PuestoArtesanal2 = (props) => {
                 <img
                     alt=""
                     id="logo"
-                    src=  {'http://localhost/'+`${props.urlLogo}`}
+                    src={ uploadUrl+`${props.urlLogo}`}
                     crossOrigin=""
                 ></img>
             </a-assets>
