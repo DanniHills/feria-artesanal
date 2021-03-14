@@ -4,21 +4,27 @@ import { Entity, Scene } from "aframe-react";
 import { PuestoArtesanal as PuestoArtesanalIzq } from "../components/puestoartesanalIzq";
 import { PuestoArtesanal2 as PuestoArtesanalDer } from "../components/puestoartesanalDer";
 import PuestosService from "../services/PuestosService";
+import MapaComponent from "./mapa";
 
 
 function HomeComponent() {
   const [puestosHTML, setPuestosHTML] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     PuestosService.obtenerPuestos()
       .then((res) => {
         console.log(res);
         setPuestosHTML(generarPuestos(res));
+        setLoading(false);
       })
       .catch((e) => {
         console.log(e);
       });
   
   }, []);
+
+  
+
   const generarPuestos= useCallback((puestos)=> {
     let coordxIzq = -23; //-1.41;
     let coordyIzq = 6.5; //6.048;
@@ -42,6 +48,7 @@ function HomeComponent() {
           <PuestoArtesanalIzq
             key={puesto.pArt_id}
             pArt_id={puesto.pArt_id}
+            name={puesto.pArt_nombre}
             urlLogo={puesto.pArt_logo}
             xPuesto={coordxIzq}
             yPuesto={coordyIzq}
@@ -60,6 +67,7 @@ function HomeComponent() {
           <PuestoArtesanalDer
             key={puesto.pArt_id}
             pArt_id={puesto.pArt_id}
+            pArt_nombre={puesto.pArt_nombre}
             urlLogo={puesto.pArt_logo}
             xPuesto={coordxDer}
             yPuesto={coordyDer}
@@ -81,7 +89,8 @@ function HomeComponent() {
   },[])     ;
   return (
     <div style={{zIndex: -1}}>
-      <Scene>
+      {!loading && <MapaComponent/>}
+      <Scene class='listenonkey'>
         <a-assets>
           <img
             alt=""
@@ -115,7 +124,7 @@ function HomeComponent() {
           intensity="0.8"
         />
 
-        <Entity primitive="a-camera" position="6.9 6.9 122"   camera="" rotation="" look-controls="" wasd-controls="" data-aframe-inspector-original-camera="">         
+        <Entity primitive="a-camera" id="aframe-camara" position="6.3 6.9 100" rotation=""  look-controls="" wasd-controls="" data-aframe-inspector-original-camera="">         
           <Entity
           raycaster=""
             primitive="a-cursor"
@@ -129,3 +138,4 @@ function HomeComponent() {
   );
 }
 export default HomeComponent;
+

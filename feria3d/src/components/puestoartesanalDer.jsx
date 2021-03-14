@@ -95,13 +95,13 @@ export const PuestoArtesanal2 = (props) => {
 
         });
         return htmlProd;
-    }, [props.productos, props.xPuesto, props.yPuesto, props.zPuesto]);
+    }, []);
     const history = useHistory();
     const handleClick = useCallback(() => history.push('/puesto/' + props.pArt_id), [history]);
     return (
         <>
             <a-assets>
-                <a-asset-item id="puestoDer" src={`${process.env.PUBLIC_URL} ${urlPuestoD}`}></a-asset-item>
+                <a-asset-item  name={props.pArt_nombre} class="puestosArtesanales" position={`${props.xPuesto} ${props.yPuesto} ${props.zPuesto}`} id={'puesto' + props.pArt_id + '-der'} src={`${process.env.PUBLIC_URL} ${urlPuestoD}`}></a-asset-item>
                 <img
                     alt=""
                     id="logo"
@@ -112,7 +112,7 @@ export const PuestoArtesanal2 = (props) => {
             {productoHTML}
             <Entity
                 key={`${props.puestoid}`}
-                gltf-model="#puestoDer"
+                gltf-model={'#puesto' + props.pArt_id + '-der'}
                 position={`${props.xPuesto} ${props.yPuesto} ${props.zPuesto}`}
                 scale="0.8 0.8 0.8 "
                 Rotation="0 180 0 "
@@ -125,7 +125,7 @@ export const PuestoArtesanal2 = (props) => {
                 primitive="a-plane"
                 position= {`${XlOGO} ${YlOGO} ${ZlOGO}`}
                 rotation=" 0 -90 -180"
-                scale="-1.58 -0.35 1"
+                scale="-1.38 -0.35 1"
                 height="10"
                 width="10"
 

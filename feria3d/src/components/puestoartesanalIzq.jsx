@@ -35,7 +35,7 @@ export const PuestoArtesanal = (props) => {
         let xC1 = props.xPuesto + 9.3;
         let yC1 = props.yPuesto + 0.4; //OK
         let zC1 = props.zPuesto + 3;
-        console.log('central:' + xC1, yC1, zC1);
+        //console.log('central:' + xC1, yC1, zC1);
         let ismesaC = true; // mesa central producto principal al lado 
         let contadorMesaCentral = 0;
         /*let mesaEstante = 0;
@@ -75,14 +75,13 @@ export const PuestoArtesanal = (props) => {
             }
         });
         return htmlProd;
-    }, [props.productos, props.xPuesto, props.yPuesto, props.zPuesto]);
-
+    }, []);
     const history = useHistory();
     const handleClick = useCallback(() => history.push('/puesto/' + props.pArt_id), [history]);
     return (
         <>
             <a-assets>
-                <a-asset-item id="puestoIzq" src={`${process.env.PUBLIC_URL} ${urlPuesto}`}></a-asset-item>
+                <a-asset-item name={props.name} class="puestosArtesanales" position={`${props.xPuesto} ${props.yPuesto} ${props.zPuesto}`} id={'puesto' + props.pArt_id + '-izq'} src={`${process.env.PUBLIC_URL} ${urlPuesto}`}></a-asset-item>
                 <img
                     alt=""
                     id="logo"
@@ -94,7 +93,7 @@ export const PuestoArtesanal = (props) => {
             {productoHTML}
             <Entity
                 key={`${props.puestoid}`}
-                gltf-model="#puestoIzq"
+                gltf-model={'#puesto' + props.pArt_id + '-izq'}
                 position={`${props.xPuesto} ${props.yPuesto} ${props.zPuesto}`}
                 scale="0.8 0.8 0.8 "
                 Rotation="0 0 0 "
