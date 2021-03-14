@@ -105,7 +105,7 @@ export const PuestoArtesanal2 = (props) => {
                 <img
                     alt=""
                     id="logo"
-                    src={process.env.PUBLIC_URL + "/img/logo/flooop.png"}
+                    src=  {'http://localhost/'+`${props.urlLogo}`}
                     crossOrigin=""
                 ></img>
             </a-assets>
@@ -130,12 +130,12 @@ export const PuestoArtesanal2 = (props) => {
                 width="10"
 
             />
-            <Entity primitive="a-plane"
+              <Entity primitive="a-plane"
                 color="#f0b7b7"
                 src={`${process.env.PUBLIC_URL} ${urlshop}`}
                 position={`${XEntrar} ${YEntrar} ${ZEntrar}`}
                 rotation="-20 -58.275 0"
-                height="10" width="10" material="" geometry="height: 5" scale="0.5 1 0.5"
+                height="10" width="10" material="" geometry="height: 5" scale="0.5 0.5 0.5"
                 events={{
                     click: handleClick.bind(this)
                 }}>

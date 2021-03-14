@@ -3,6 +3,7 @@ import 'aframe';
 import { Entity } from 'aframe-react';
 import { Producto } from './producto';
 import { useHistory } from 'react-router-dom';
+
 export const PuestoArtesanal = (props) => {
 
     const uploadUrl = 'http://localhost/';
@@ -29,7 +30,7 @@ export const PuestoArtesanal = (props) => {
        let contadorMesalateral = 0;//contador mesa lateral para devolverse de der-izq
        let mesalateralCP = 0;//cantidad de productos maximo en ambas mesas laterales
        let ismesa = true;
-       */
+       */  console.log('logo',`${props.urlLogo}`)
         let htmlProd = [];
         let mesacentral = 0;// contador producto principales, cantidad maxima en la mesa central
         let xC1 = props.xPuesto + 9.3;
@@ -76,6 +77,7 @@ export const PuestoArtesanal = (props) => {
         });
         return htmlProd;
     }, []);
+  
     const history = useHistory();
     const handleClick = useCallback(() => history.push('/puesto/' + props.pArt_id), [history]);
     return (
@@ -85,9 +87,10 @@ export const PuestoArtesanal = (props) => {
                 <img
                     alt=""
                     id="logo"
-                    src={process.env.PUBLIC_URL + "/img/logo/flooop.png"}
+                    src={ uploadUrl+`${props.urlLogo}`}
                     crossOrigin=""
                 ></img>
+          
             </a-assets>
 
             {productoHTML}
@@ -110,12 +113,12 @@ export const PuestoArtesanal = (props) => {
                 width="10"
 
             />
-            <Entity primitive="a-plane"
+        <Entity primitive="a-plane"
                 src={`${process.env.PUBLIC_URL} ${urlshop}`}
                 color="#f0b7b7"
                 position={`${XEntrar} ${YEntrar} ${ZEntrar}`}
                 rotation="-20 63.833 0"
-                height="10" width="10" material="" geometry="height: 5" scale="0.5 1 0.5"
+                height="10" width="10" material="" geometry="height: 5" scale="0.5 0.5 0.5"
                 events={{
                     click: handleClick.bind(this)
                 }}>
@@ -123,3 +126,5 @@ export const PuestoArtesanal = (props) => {
         </>
     );
 }
+
+

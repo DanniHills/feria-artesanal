@@ -10,20 +10,22 @@ import piso from "../assets/img/Ground041_2K_Color.png";
 import pisonormal from "../assets/normal/normalpiso.png";
 
 
-export const PuestoArtespueanal = (props) => {
+export const PuestoArtesanal = (props) => {
   const uploadUrl = "http://localhost/";
   //const urlPuesto = "../img/paredes2021.glb";
   const pArt_id = useParams().pArt_id;
   const [productoHTML, setProductoHTML] = useState([]);
-
+  const [producto, setProducto] = useState([]);
   useEffect(() => {
     PuestosService.obtenerPuestoConProductos(pArt_id).then((res) => {
       console.log("response ", res.productos);
+      setProducto(res);
       setProductoHTML(generarProductos(res.productos));
     }).catch((e) => {
       console.log(e);
     });
   }, []); //[props.productos]
+  console.log('k',producto);
   const generarProductos = useCallback(() => {
     let xM1 = 0;
     let yM1 = 6.048;
@@ -136,7 +138,7 @@ export const PuestoArtespueanal = (props) => {
           <img
             alt=""
             id="logo"
-            src={process.env.PUBLIC_URL + "/img/logo/flooop.png"}
+            src={ uploadUrl+`${producto.pArt_logo}`}
             crossOrigin=""
           ></img>
           <a-asset-item
@@ -196,4 +198,4 @@ export const PuestoArtespueanal = (props) => {
     </>
   );
 };
-export default PuestoArtespueanal;
+export default PuestoArtesanal;
