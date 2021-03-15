@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Checkbox, Button, Tooltip } from 'antd';
+import { Row, Col, Tooltip } from 'antd';
 
 function MapaComponent() {
     

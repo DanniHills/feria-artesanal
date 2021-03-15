@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Card, Row, Col, Checkbox, Menu } from "antd";
+import { Card, Row, Col, Input } from "antd";
 import CatalogoService from "../../services/CatalogoService";
 import { Link } from "react-router-dom";
-import SubMenu from "antd/lib/menu/SubMenu";
-import {UserOutlined} from "@ant-design/icons";
+import {SearchOutlined} from "@ant-design/icons";
 
 const { Meta } = Card
 function CatalogoComponent() {
@@ -22,9 +21,18 @@ function CatalogoComponent() {
         console.log(e);
       });
   }, []);
-  function onChange(e) {
-    console.log(`checked = ${e.target.checked}`);
-  }
+  
+  const [filterTable, setFilterTable ] = useState(null);
+
+  const onSearch = value => {
+    value = value.target.value;
+    let results = Catalogo.filter((el) =>
+        el.prod_nombre.toLowerCase().indexOf(value.toLowerCase()) > -1 
+       );
+    setFilterTable(results);
+  };
+
+ 
   function generarCatalogo(puestos) {
 
     let Catalogo = [];
@@ -50,41 +58,18 @@ function CatalogoComponent() {
 
   return (
     <>
-      <Row style={{ padding: 30 }} justify="start" align="stretch">
-        <Col span={24}><h1 style={{ fontSize: 25 }}>Catálogo</h1></Col>
-        <Col span={4}>
-          <Menu defaultSelectedKeys={["1"]}
-            defaultOpenKeys={["sub1"]}
-            mode="inline">
-              <SubMenu Key="sub1" icon={<UserOutlined/>} title="Artesanos">
-                <Menu.Item >
-                <Checkbox onChange={onChange}>Checkbox</Checkbox>
-                </Menu.Item>
-              </SubMenu>
-              <SubMenu Key="sub1" icon={<UserOutlined/>} title="Tecnicas">
-                <Menu.Item >
-                <Checkbox onChange={onChange}>Checkbox</Checkbox>
-                </Menu.Item>
-              </SubMenu>
-              <SubMenu Key="sub1" icon={<UserOutlined/>} title="Materiales">
-                <Menu.Item >
-                <Checkbox onChange={onChange}>Checkbox</Checkbox>
-                </Menu.Item>
-              </SubMenu>
-          </Menu>
-        
+        <Row style={{padding: 30}} justify="start" align="top">
+        <Col span={24}><h1 style={{fontSize: 25}}>Catálogo</h1></Col>
+        <Col span={7}>
+          <Input  suffix={<SearchOutlined />} placeholder="Ingrese nombre del producto " onKeyUp={onSearch}/>
         </Col>
-        <Col style={{ marginTop: 30 }} span={20}>
-
-          <Row gutter={[16, 24]} justify="start" align="stretch">
-            {Catalogo}
+        
+        <Col style={{marginTop: 30}} span={24}>
+          <Row gutter={[16, 24]}>
+            {Catalogo}            
           </Row>
         </Col>
       </Row>
-
-
-
-
     </>
   );
 }
