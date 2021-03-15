@@ -18,8 +18,9 @@ export const PuestoArtesanal2 = (props) => {
         if (props.productos !== undefined)
             setProductoHTML(generarProductos());
         // eslint-disable-next-line react-hooks/exhaustive-deps
+        console.log('logo',uploadUrl+`${props.urlLogo}`)
     }, [props.productos]);
-
+    
     const generarProductos = useCallback(() => {
         /*let xM1 = props.xPuesto - 11; //24.2
         let yM1 = props.yPuesto - 0.5; //0.5
@@ -31,8 +32,8 @@ export const PuestoArtesanal2 = (props) => {
         let htmlProd = [];
         let mesacentral = 0;// contador producto principales, cantidad maxima en la mesa central
         let xC1 = props.xPuesto -8;
-        let yC1 = props.yPuesto +0.2;
-        let zC1 = props.zPuesto - 4;
+        let yC1 = props.yPuesto -0.7;//+0.2;
+        let zC1 = props.zPuesto - 1;
 
         let ismesaC = true; // mesa central producto principal al lado 
         let contadorMesaCentral = 0;
@@ -71,7 +72,7 @@ export const PuestoArtesanal2 = (props) => {
             }*/
 
             //MESA CENTRAL + PRODUCTOS PRINCIPALES
-            if (mesacentral < 11 && producto.prod_principal && producto.prod_std) {// maximo productos principales mesa central
+            if (mesacentral < 5 && producto.prod_principal && producto.prod_std) {// maximo productos principales mesa central
                 htmlProd.push(<Producto
                     key={producto.prod_id}
                     prod_id={producto.prod_id}
@@ -84,7 +85,7 @@ export const PuestoArtesanal2 = (props) => {
 
                 if (ismesaC) {
 
-                    zC1+=3;
+                    zC1+=4.3;
                    // ismesaC = !ismesaC
                 }/* else {
                     zC1 += 1;
@@ -104,7 +105,7 @@ export const PuestoArtesanal2 = (props) => {
                 <a-asset-item  name={props.pArt_nombre} class="puestosArtesanales" position={`${props.xPuesto} ${props.yPuesto} ${props.zPuesto}`} id={'puesto' + props.pArt_id + '-der'} src={`${process.env.PUBLIC_URL} ${urlPuestoD}`}></a-asset-item>
                 <img
                     alt=""
-                    id="logo"
+                    id={`logo${props.pArt_id}`}
                     src={ uploadUrl+`${props.urlLogo}`}
                     crossOrigin=""
                 ></img>
@@ -116,12 +117,12 @@ export const PuestoArtesanal2 = (props) => {
                 position={`${props.xPuesto} ${props.yPuesto} ${props.zPuesto}`}
                 scale="0.8 0.8 0.8 "
                 Rotation="0 180 0 "
-
+                light="intensity:  0.05;  type:  ambient;  angle:  90;  color:  #c6b9b9"  
             >
             </Entity>
             <Entity
-                src='#logo'
-                color="pink"
+                src={`#logo${props.pArt_id}`}
+                color="#FFF"
                 primitive="a-plane"
                 position= {`${XlOGO} ${YlOGO} ${ZlOGO}`}
                 rotation=" 0 -90 -180"

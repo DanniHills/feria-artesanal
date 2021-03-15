@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row,Table, Input, Popconfirm, Form, message, Space, Button } from "antd";
+import { Col, Row,Table, Input, Popconfirm, Form, message, Space, Button,Select } from "antd";
 import AdministradorService from '../../services/administradorService';
 import { SearchOutlined } from '@ant-design/icons';
 import {DeleteTwoTone, EditTwoTone } from "@material-ui/icons";
 const administradorService = new AdministradorService();
-
+const { Option} = Select;
 function BuscarPuestoComponent() {
   const [dataSource, setDataSource] = useState([]);
   const [filterTable, setFilterTable ] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const EditableCell = ({editing, dataIndex, title, inputType, record, index, children, ...restProps}) => {
+    const inputNode = inputType === 'select' ? <Select defaultValue={record.pArt_std}>
+    <Option value="Activo" >Activo</Option>
+    <Option value="Inactivo" >Inactivo</Option>
+    </Select> : <Input />;
     return (
       <td {...restProps}>
         {editing ? (
@@ -26,7 +30,7 @@ function BuscarPuestoComponent() {
               },
             ]}
           >
-            <Input />
+            {inputNode }
           </Form.Item>
         ) : (
           children
@@ -89,6 +93,7 @@ function BuscarPuestoComponent() {
           }
         }
         const puesto = newDataSource[indexDataSource];
+        puesto.pArt_std = puesto.pArt_std==='Activo'?1:0;
         administradorService.actualizarPuesto(puesto.pArt_id, puesto).then(response => {
           //console.log(response);
           message.success(response.message);
@@ -113,6 +118,7 @@ function BuscarPuestoComponent() {
         width: '40%',
         editable: true,
       },
+     
       {
         title: 'Activo',
         dataIndex: 'pArt_std',
@@ -157,6 +163,7 @@ function BuscarPuestoComponent() {
         onCell: (record) => ({
           record,
           dataIndex: col.dataIndex,
+          inputType: col.dataIndex === 'pArt_std' ? 'select' : 'text',
           title: col.title,
           editing: isEditing(record),
         }),

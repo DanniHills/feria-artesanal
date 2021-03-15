@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Row,Table, Input, Popconfirm, Form, message, Space, Button } from "antd";
+import { Col, Row,Table, Input, Popconfirm, Form, message, Space, Button, Select } from "antd";
 import AdministradorService from '../../services/administradorService';
 import { SearchOutlined, DeleteTwoTone, EditTwoTone } from '@ant-design/icons';
 
 
 const administradorService = new AdministradorService();
-
+const { Option} = Select;
 function BuscarFeriaComponent() {
     
       const [dataSource, setDataSource] = useState([]);
@@ -14,6 +14,10 @@ function BuscarFeriaComponent() {
 
 
       const EditableCell = ({editing, dataIndex, title, inputType, record, index, children, ...restProps}) => {
+        const inputNode = inputType === 'select' ? <Select defaultValue={record.feria_std}>
+        <Option value="Activo" >Activo</Option>
+        <Option value="Inactivo" >Inactivo</Option>
+        </Select> : <Input />;
         return (
           <td {...restProps}>
             {editing ? (
@@ -29,7 +33,7 @@ function BuscarFeriaComponent() {
                   },
                 ]}
               >
-                <Input />
+                   {inputNode}
               </Form.Item>
             ) : (
               children
@@ -92,6 +96,7 @@ function BuscarFeriaComponent() {
               }
             }
             const feria = newDataSource[indexDataSource];
+            feria.feria_std = feria.feria_std==='Activo'?1:0;
             administradorService.actualizarFeria(feria.feria_id, feria).then(response => {
               //console.log(response);
               message.success(response.message);
@@ -160,6 +165,7 @@ function BuscarFeriaComponent() {
             onCell: (record) => ({
               record,
               dataIndex: col.dataIndex,
+              inputType: col.dataIndex === 'feria_std' ? 'select' : 'text',
               title: col.title,
               editing: isEditing(record),
             }),
@@ -197,7 +203,7 @@ function BuscarFeriaComponent() {
       useEffect( () => {
         administradorService.buscarFeria().then(response => {
           response.forEach((feria, index) => {
-            response[index].key = index;
+            response[index].key = index;  
             response[index].feria_std= response[index].feria_std?'Activo':'Inactivo'
           });
           setDataSource(response)

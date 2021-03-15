@@ -5,7 +5,7 @@ import { PuestoArtesanal as PuestoArtesanalIzq } from "../components/puestoartes
 import { PuestoArtesanal2 as PuestoArtesanalDer } from "../components/puestoartesanalDer";
 import PuestosService from "../services/PuestosService";
 import MapaComponent from "./mapa";
-import piso from "../assets/img/Ground041_2K_Color.png";
+import piso from "../assets/img/Ground041_2K_Color_MD.png";
 import pisonormal from "../assets/normal/normalpiso.png";
 
 

@@ -18,7 +18,7 @@ exports.create = (req, res) => {
         pArt_nombre: req.body.pArt_nombre,
         pArt_descrip: req.body.pArt_descrip,
         pArt_logo:'',
-        pArt_std: req.body.pArt_std,
+        pArt_std:'1',
         pArt_ubicacion: req.body.tec_id
 
     };

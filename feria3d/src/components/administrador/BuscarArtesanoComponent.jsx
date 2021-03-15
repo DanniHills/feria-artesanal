@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Input, Col, Row, Table, Space, Popconfirm, message, Form, Button } from 'antd';
+import { Input, Col, Row, Table, Space, Popconfirm, message, Form, Button, Select } from 'antd';
 import AdministradorService from '../../services/administradorService';
 
 import { SearchOutlined, EditTwoTone, DeleteTwoTone } from '@ant-design/icons';
-
+const { Option} = Select;
 const administradorService = new AdministradorService();
 
 function BuscarArtesanoComponent() {
@@ -25,6 +25,11 @@ function BuscarArtesanoComponent() {
 
      
       const EditableCell = ({editing, dataIndex, title, inputType, record, index, children, ...restProps}) => {
+     
+        const inputNode = inputType === 'select' ? <Select defaultValue={record.art_std}>
+        <Option value="Activo" >Activo</Option>
+        <Option value="Inactivo" >Inactivo</Option>
+        </Select> : <Input />;
         return (
           <td {...restProps}>
             {editing ? (
@@ -40,7 +45,7 @@ function BuscarArtesanoComponent() {
                   },
                 ]}
               >
-                <Input />
+                {inputNode}
               </Form.Item>
             ) : (
               children
@@ -107,8 +112,9 @@ function BuscarArtesanoComponent() {
                 setEditingKey('');
               }
             }
-            const artesano = newDataSource[indexDataSource];
-            administradorService.actualizarArtesano(artesano.art_id, artesano).then(response => {
+            const art = newDataSource[indexDataSource];
+            art.art_std = art.art_std==='Activo'?1:0;
+            administradorService.actualizarArtesano(art.art_id, art).then(response => {
               console.log(response);
 
               if(response.status===500){
@@ -171,6 +177,7 @@ function BuscarArtesanoComponent() {
             dataIndex: 'art_std',
             width: '15%',
             editable: true,
+            
              
           },
           {
@@ -211,6 +218,7 @@ function BuscarArtesanoComponent() {
             onCell: (record) => ({
               record,
               dataIndex: col.dataIndex,
+              inputType: col.dataIndex === 'art_std' ? 'select' : 'text',
               title: col.title,
               editing: isEditing(record),
             }),
@@ -274,11 +282,11 @@ function BuscarArtesanoComponent() {
        
        <Row style={{padding: 30}} justify="start" align="top">
           <Col span={24}><h1 style={{fontSize: 25}}>Buscar Artesano</h1></Col>
-          <Col lg={8 } md={8} sm={24} xs={24}>
+          <Col lg={8 } md={8} sm={24} xs={24} >
             <Input  suffix={<SearchOutlined />} placeholder="Ingrese datos " onKeyUp={onSearch} />
           </Col>
           
-          <Col style={{marginTop: 30}} >
+          <Col style={{marginTop: 30}}span={24} >
             <EditableTable />
           </Col>
         </Row>
