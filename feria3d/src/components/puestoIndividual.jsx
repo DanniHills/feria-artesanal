@@ -18,18 +18,18 @@ export const PuestoArtesanal = (props) => {
   const [producto, setProducto] = useState([]);
   useEffect(() => {
     PuestosService.obtenerPuestoConProductos(pArt_id).then((res) => {
-      console.log("response ", res.productos);
       setProducto(res);
       setProductoHTML(generarProductos(res.productos));
     }).catch((e) => {
       console.log(e);
     });
   }, []); //[props.productos]
-  console.log('k',producto);
-  const generarProductos = useCallback(() => {
-    let xM1 = 0;
-    let yM1 = 6.048;
-    let zM1 = 0;
+
+  const generarProductos = useCallback((prod) => {
+
+    let xM1 = -11.5;
+    let yM1 = 4;
+    let zM1 = -10;
     console.log(xM1, yM1, zM1)
     let htmlProd = [];
     let contadorMesalateral = 0; //contador mesa lateral para devolverse de der-izq
@@ -37,20 +37,23 @@ export const PuestoArtesanal = (props) => {
 
     let ismesa = true;
     let mesacentral = 0; // contador producto principales, cantidad maxima en la mesa central
-    let xC1 = 3;
-    let yC1 = 4.7; //OK
-    let zC1 = 5;
+    let xC1 = 4.8;
+    let yC1 = 3.7; //OK
+    let zC1 = 3;
     console.log(xC1, yC1, zC1);
 
     let ismesaC = true; // mesa central producto principal al lado
     let contadorMesaCentral = 0;
 
 
-    props.productos.forEach((producto) => {
+    prod.forEach((productos) => {
+      console.log("2",producto)
+
+    
       if (contadorMesalateral === 4) {
         contadorMesalateral = 0;
-        xM1 = xM1 + 15;
-        zM1 += 3;
+          zM1 -=2.5;
+          xM1 += 18;
       }
       if (contadorMesaCentral === 2) {
         contadorMesaCentral = 0;
@@ -58,17 +61,17 @@ export const PuestoArtesanal = (props) => {
         zC1 = 2;
       }
 
-      if (mesalateralCP < 20 && !producto.prod_principal) {
+      if (mesalateralCP < 20 && !productos.prod_principal) {
         //colocar maximos de productos no principales en mesas laterales n
         htmlProd.push(
           <Producto
-            key={producto.prod_id}
-            prod_id={producto.prod_id}
-            prod_nombre={producto.prod_nombre}
-            prod_descrip={producto.prod_descrip}
-            prod_scale={producto.prod_scale}
-            pArt_id={producto.pArt_id}
-            urlProducto={uploadUrl + producto.prod_modelo3D}
+            key={productos.prod_id}
+            prod_id={productos.prod_id}
+            prod_nombre={productos.prod_nombre}
+            prod_descrip={productos.prod_descrip}
+            prod_scale={productos.prod_scale}
+            pArt_id={productos.pArt_id}
+            urlProducto={uploadUrl + productos.prod_modelo3D}
             xM1={xM1}
             yM1={yM1}
             zM1={zM1}
@@ -76,27 +79,28 @@ export const PuestoArtesanal = (props) => {
         );
 
         if (ismesa) {
-          xM1 += 2;
+          zM1 += 2.5;
           ismesa = !ismesa;
         } else {
-          xM1 -= 28;
+          xM1 += 3;
           ismesa = !ismesa;
         }
 
         contadorMesalateral++;
       }
 
-      if (mesacentral < 9 && producto.prod_principal) {
+      if (mesacentral < 9 && productos.prod_principal) {
         // maximo productos principales mesa central
         htmlProd.push(
           <Producto
-            key={producto.prod_id}
-            prod_nombre={producto.prod_nombre}
-            prod_descrip={producto.prod_descrip}
-            prod_scale={producto.prod_scale}
-            idProducto={producto.prod_id}
-            pArt_id={producto.pArt_id}
-            urlProducto={uploadUrl + producto.prod_modelo3D}
+            key={productos.prod_id}
+            prod_id={productos.prod_id}
+            prod_nombre={productos.prod_nombre}
+            prod_descrip={productos.prod_descrip}
+            prod_scale={productos.prod_scale}
+            idProducto={productos.prod_id}
+            pArt_id={productos.pArt_id}
+            urlProducto={uploadUrl + productos.prod_modelo3D}
             xM1={xC1}
             yM1={yC1}
             zM1={zC1}
@@ -137,7 +141,7 @@ export const PuestoArtesanal = (props) => {
           ></img>
           <img
             alt=""
-            id="logo"
+            id ={`logo${producto.pArt_id}`}
             src={ uploadUrl+`${producto.pArt_logo}`}
             crossOrigin=""
           ></img>
@@ -159,9 +163,8 @@ export const PuestoArtesanal = (props) => {
 
         <Entity primitive="a-camera" position="1.5 7 20" rotation="-6.5 -2.8 -4.2" objeto="clickable">
           <Entity
-
             primitive="a-cursor"
-            cursor="downEvents:  ;  upEvents:  rayOrigin:  mouse"
+            //cursor="downEvents:  ;  upEvents:  rayOrigin:  mouse"
             material={{ color: "black", shader: "flat", opacity: 4 }}
             geometry={{ radiusInner: 0.005, radiusOuter: 0.007 }}
           />
@@ -178,8 +181,8 @@ export const PuestoArtesanal = (props) => {
         />
         <Entity primitive="a-sky" src="#sky" radius="600" />
         <Entity
-          src='#logo'
-          color="pink"
+          src={`#logo${pArt_id}`}
+          color="#FFF"
           primitive="a-plane"
           position="1.035 8.692 -11.02"
           rotation=" 0 0 -180"
